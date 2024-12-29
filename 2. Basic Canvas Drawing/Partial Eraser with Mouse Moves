@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Eraser Effect</title>
+  <style>
+    body { margin: 0; padding: 0; }
+    #eraserCanvas {
+      border: 1px solid #ccc;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+<body>
+<canvas id="eraserCanvas" width="500" height="300"></canvas>
+<script>
+  const canvas = document.getElementById('eraserCanvas');
+  const ctx = canvas.getContext('2d');
+  // Fill the canvas with a solid color
+  ctx.fillStyle = 'orange';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Erase a small rectangle where the mouse moves, if mouse is down
+  let isDrawing = false;
+  canvas.addEventListener('mousedown', () => {
+    isDrawing = true;
+  });
+  canvas.addEventListener('mouseup', () => {
+    isDrawing = false;
+  });
+  canvas.addEventListener('mousemove', (e) => {
+    if (!isDrawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    // Erase a 20x20 area under the mouse
+    ctx.clearRect(x - 10, y - 10, 20, 20);
+  });
+</script>
+</body>
+</html>
