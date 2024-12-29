@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Double Buffering</title>
+</head>
+<body>
+<canvas id="mainCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const mainCanvas = document.getElementById('mainCanvas');
+const mCtx = mainCanvas.getContext('2d');
+// offscreen
+const offCanvas = document.createElement('canvas');
+offCanvas.width = 400;
+offCanvas.height = 300;
+const oCtx = offCanvas.getContext('2d');
+let x=0, dx=2;
+function animate() {
+  // draw background on offscreen
+  oCtx.fillStyle = 'white';
+  oCtx.fillRect(0,0,400,300);
+  // moving shape
+  oCtx.fillStyle = 'green';
+  oCtx.fillRect(x, 100, 50, 50);
+  x+=dx;
+  if(x<0 || x+50>400){
+    dx=-dx;
+  }
+  // copy from offscreen to main in one operation
+  mCtx.drawImage(offCanvas, 0,0);
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
