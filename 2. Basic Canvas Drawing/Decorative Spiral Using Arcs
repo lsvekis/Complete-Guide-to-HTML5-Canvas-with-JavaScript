@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Spiral with arc()</title>
+</head>
+<body>
+<canvas id="spiralCanvas" width="400" height="400" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('spiralCanvas');
+const ctx = canvas.getContext('2d');
+// Spiral parameters
+const centerX = 200;
+const centerY = 200;
+let angle = 0;
+let radius = 5;
+const turns = 8;     // number of full rotations
+const steps = 120;   // arcs per full rotation
+const radiusStep = 0.5; // how fast radius grows each arc
+ctx.beginPath();
+ctx.moveTo(centerX, centerY); // Start at center
+for (let i = 0; i < turns * steps; i++) {
+  // Each iteration draws a short arc
+  let startAngle = angle;
+  let endAngle = angle + (2 * Math.PI / steps);
+  // arc center is the same each time, but radius changes
+  ctx.arc(centerX, centerY, radius, startAngle, endAngle, false);
+  // Increment angle and radius
+  angle = endAngle;
+  radius += radiusStep;
+}
+ctx.strokeStyle = 'purple';
+ctx.lineWidth = 2;
+ctx.stroke();
+</script>
+</body>
+</html>
