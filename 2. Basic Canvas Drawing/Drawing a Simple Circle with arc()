@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Full Circle</title>
+</head>
+<body>
+<canvas id="circleCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('circleCanvas');
+const ctx = canvas.getContext('2d');
+// Begin a new path
+ctx.beginPath();
+// Draw a circle at (100, 100) with radius 50, from 0 to 2π
+ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+// Fill and stroke
+ctx.fillStyle = 'lightblue';
+ctx.fill();
+ctx.lineWidth = 3;
+ctx.strokeStyle = 'blue';
+ctx.stroke();
+</script>
+</body>
+</html>
