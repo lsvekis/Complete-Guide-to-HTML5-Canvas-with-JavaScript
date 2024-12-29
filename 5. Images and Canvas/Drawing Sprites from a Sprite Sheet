@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Sprite Sheet</title>
+</head>
+<body>
+<canvas id="canvas5" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('canvas5');
+const ctx = canvas.getContext('2d');
+// Example sprite sheet with 4 frames horizontally, each 64x64
+// For demonstration only - replace with your own sprite image
+const sprite = new Image();
+sprite.src = 'https://via.placeholder.com/256x64?text=SpriteSheet';
+sprite.onload = () => {
+  // Draw first frame (0,0) -> (64,64) at position (50,50)
+  ctx.drawImage(sprite,
+                0, 0, // top-left corner of sprite sheet
+                64, 64, // width/height of one frame
+                50, 50, // where on the Canvas to draw
+                64, 64 // size on the Canvas
+  );
+  // Draw second frame (64,0) -> (64,64) at (150,50)
+  ctx.drawImage(sprite,
+                64, 0, 
+                64, 64,
+                150, 50,
+                64, 64
+  );
+  // You could keep going for frames 3 and 4 at x=128, x=192...
+};
+</script>
+</body>
+</html>
