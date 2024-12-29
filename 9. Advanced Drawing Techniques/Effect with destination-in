@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: destination-in</title>
+</head>
+<body>
+<canvas id="destInCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('destInCanvas');
+const ctx = canvas.getContext('2d');
+// Draw a gradient background
+let grad = ctx.createLinearGradient(0, 0, 400, 0);
+grad.addColorStop(0, 'yellow');
+grad.addColorStop(1, 'purple');
+ctx.fillStyle = grad;
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+// Switch mode: destination-in
+ctx.globalCompositeOperation = 'destination-in';
+// Draw a circle => only the overlap remains, so background is kept only inside the circle
+ctx.beginPath();
+ctx.arc(200, 100, 80, 0, 2*Math.PI);
+ctx.fill(); 
+</script>
+</body>
+</html>
