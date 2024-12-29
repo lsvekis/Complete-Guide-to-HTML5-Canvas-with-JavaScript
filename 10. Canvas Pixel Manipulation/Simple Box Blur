@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Box Blur</title>
+</head>
+<body>
+<canvas id="blurCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<button id="blurBtn">Apply Box Blur</button>
+<script>
+const canvas = document.getElementById('blurCanvas');
+const ctx = canvas.getContext('2d');
+// Draw shapes
+ctx.fillStyle = 'red';
+ctx.fillRect(50,50,100,80);
+ctx.fillStyle = 'blue';
+ctx.fillRect(200,100,140,100);
+document.getElementById('blurBtn').addEventListener('click', ()=>{
+  let src = ctx.getImageData(0,0,400,300);
+  let dst = ctx.createImageData(src.width, src.height);
+  let sw = src.width, sh = src.height;
+  let sData = src.data;
+  let dData = dst.data;
+  // 3x3 box blur => each pixel is average of 3x3 neighbors
+  for(let y=1; y<sh-1; y++){
+    for(let x=1; x<sw-1; x++){
+      let rSum=0, gSum=0, bSum=0;
+      for(let ky=-1; ky<=1; ky++){
+        for(let kx=-1; kx<=1; kx++){
+          let sx = x + kx, sy = y + ky;
+          let i = (sy*sw + sx)*4;
+          rSum += sData[i];
+          gSum += sData[i+1];
+          bSum += sData[i+2];
+        }
+      }
+      let di = (y*sw + x)*4;
+      dData[di]   = rSum/9;
+      dData[di+1] = gSum/9;
+      dData[di+2] = bSum/9;
+      dData[di+3] = 255; // keep opaque
+    }
+  }
+  ctx.putImageData(dst,0,0);
+});
+</script>
+</body>
+</html>
