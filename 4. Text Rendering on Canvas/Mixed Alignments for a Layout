@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Mixed Layout</title>
+</head>
+<body>
+<canvas id="layoutCanvas" width="600" height="250" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('layoutCanvas');
+const ctx = canvas.getContext('2d');
+// Section Title at top, center aligned
+ctx.font = "24px sans-serif";
+ctx.textAlign = "center";
+ctx.textBaseline = "top";
+ctx.fillStyle = "darkblue";
+ctx.fillText("App Layout Mock", canvas.width / 2, 5);
+// Left sidebar label, left-aligned, middle baseline
+ctx.textAlign = "left";
+ctx.textBaseline = "middle";
+ctx.font = "bold 16px Arial";
+ctx.fillStyle = "black";
+ctx.fillText("Sidebar Label", 10, canvas.height / 2);
+// Right info text, right-aligned near the right edge
+ctx.textAlign = "right";
+ctx.textBaseline = "alphabetic";
+ctx.font = "18px Courier New";
+ctx.fillStyle = "darkred";
+ctx.fillText("Info Panel >>", canvas.width - 10, canvas.height - 30);
+// A centered footer message, bottom baseline
+ctx.textAlign = "center";
+ctx.textBaseline = "bottom";
+ctx.font = "italic 14px Georgia";
+ctx.fillStyle = "green";
+ctx.fillText("© 2024 Canvas", canvas.width / 2, canvas.height - 5);
+</script>
+</body>
+</html>
