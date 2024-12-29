@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Centered Button Text</title>
+</head>
+<body>
+<canvas id="buttonCanvas" width="300" height="150" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('buttonCanvas');
+const ctx = canvas.getContext('2d');
+// Draw a button-like rectangle
+const btnX = 50, btnY = 40, btnW = 200, btnH = 60;
+ctx.fillStyle = 'lightblue';
+ctx.fillRect(btnX, btnY, btnW, btnH);
+// Outline the button
+ctx.strokeStyle = 'blue';
+ctx.lineWidth = 3;
+ctx.strokeRect(btnX, btnY, btnW, btnH);
+// Now draw text in the center of that rectangle
+ctx.font = "bold 20px Arial";
+ctx.fillStyle = "blue";
+// textAlign center horizontally, textBaseline middle vertically
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+// The center of the button
+let centerX = btnX + btnW / 2;
+let centerY = btnY + btnH / 2;
+ctx.fillText("CLICK ME", centerX, centerY);
+</script>
+</body>
+</html>
