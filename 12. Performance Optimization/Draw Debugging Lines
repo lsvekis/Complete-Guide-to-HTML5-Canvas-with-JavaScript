@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Debug Lines</title>
+</head>
+<body>
+<canvas id="debugCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('debugCanvas');
+const ctx = canvas.getContext('2d');
+// Draw background
+ctx.fillStyle = 'lightgray';
+ctx.fillRect(0,0, 400,200);
+// Debug line to see mid-line horizontally
+ctx.strokeStyle = 'red';
+ctx.beginPath();
+ctx.moveTo(0, 100);
+ctx.lineTo(400, 100);
+ctx.stroke();
+// Suppose we want a blue rectangle at (150,60, 100x40)
+ctx.fillStyle = 'blue';
+ctx.fillRect(150, 60, 100, 40);
+</script>
+</body>
+</html>
