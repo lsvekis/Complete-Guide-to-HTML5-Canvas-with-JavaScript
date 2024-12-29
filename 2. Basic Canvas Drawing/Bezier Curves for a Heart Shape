@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Heart Shape</title>
+</head>
+<body>
+<canvas id="heartCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('heartCanvas');
+const ctx = canvas.getContext('2d');
+// Start near the bottom tip of the heart
+ctx.beginPath();
+ctx.moveTo(200, 180);
+// Left side of the heart
+ctx.bezierCurveTo(150, 130, 100, 80, 200, 60);
+// Right side of the heart
+ctx.bezierCurveTo(300, 80, 250, 130, 200, 180);
+ctx.closePath();
+// Fill and stroke
+ctx.fillStyle = 'pink';
+ctx.fill();
+ctx.strokeStyle = 'red';
+ctx.lineWidth = 2;
+ctx.stroke();
+</script>
+</body>
+</html>
