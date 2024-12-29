@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Aspect Ratio</title>
+</head>
+<body>
+<canvas id="thumbCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('thumbCanvas');
+const ctx = canvas.getContext('2d');
+const boxWidth = 100;
+const boxHeight = 100;
+// Draw a placeholder box
+ctx.strokeStyle = 'gray';
+ctx.strokeRect(50, 50, boxWidth, boxHeight);
+const img = new Image();
+img.src = 'https://via.placeholder.com/300x150?text=Original'; 
+img.onload = () => {
+  // Calculate scaled dimensions to fit into 100x100
+  const originalAspect = img.width / img.height;
+  let scaledWidth, scaledHeight;
+  if (originalAspect > 1) {
+    // wider than tall
+    scaledWidth = boxWidth;
+    scaledHeight = boxWidth / originalAspect;
+  } else {
+    // taller or equal ratio
+    scaledHeight = boxHeight;
+    scaledWidth = boxHeight * originalAspect;
+  }
+  // Center the image in the box
+  const offsetX = 50 + (boxWidth - scaledWidth) / 2;
+  const offsetY = 50 + (boxHeight - scaledHeight) / 2;
+  ctx.drawImage(img, offsetX, offsetY, scaledWidth, scaledHeight);
+};
+</script>
+</body>
+</html>
