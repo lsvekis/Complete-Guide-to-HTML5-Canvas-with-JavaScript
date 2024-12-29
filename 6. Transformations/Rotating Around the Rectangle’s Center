@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Centered Rotation</title>
+</head>
+<body>
+<canvas id="rotateCanvas2" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('rotateCanvas2');
+const ctx = canvas.getContext('2d');
+// The rectangle's center is at (150, 100), size 100x50
+const rectWidth = 100;
+const rectHeight = 50;
+const centerX = 150;
+const centerY = 100;
+// Draw a guide
+ctx.strokeStyle = 'gray';
+ctx.beginPath();
+ctx.arc(centerX, centerY, 3, 0, 2 * Math.PI);
+ctx.stroke();
+ctx.save();
+// Translate to the rectangle's center
+ctx.translate(centerX, centerY);
+// Rotate 30 degrees
+ctx.rotate((30 * Math.PI) / 180);
+// After rotation, if we want the top-left corner at (0,0) now, we shift back by half width/height
+ctx.fillStyle = 'purple';
+ctx.fillRect(-rectWidth / 2, -rectHeight / 2, rectWidth, rectHeight);
+ctx.restore();
+</script>
+</body>
+</html>
