@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Spritesheet Efficiency</title>
+</head>
+<body>
+<canvas id="spriteCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('spriteCanvas');
+const ctx = canvas.getContext('2d');
+// single spritesheet
+let sheet = new Image();
+sheet.src = 'sprites.png'; // hypothetical sprite sheet with multiple frames
+// we have two objects, each referencing a portion of the sheet
+let characters = [
+  {x:50, y:150, frameX:0, frameY:0, w:32, h:32, dx:2},
+  {x:200,y:120,frameX:64, frameY:0, w:32, h:32, dx:-2}
+];
+sheet.onload=()=>{
+  animate();
+};
+function animate(){
+  ctx.clearRect(0,0,500,300);
+  for(let c of characters){
+    // move
+    c.x += c.dx;
+    if(c.x<0|| c.x+c.w>500) c.dx=-c.dx;
+    // draw subregion from sheet
+    ctx.drawImage(sheet, c.frameX, c.frameY, c.w, c.h, c.x, c.y, c.w, c.h);
+  }
+  requestAnimationFrame(animate);
+}
+</script>
+</body>
+</html>
