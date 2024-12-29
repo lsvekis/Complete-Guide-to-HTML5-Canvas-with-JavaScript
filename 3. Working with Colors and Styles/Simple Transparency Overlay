@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic globalAlpha</title>
+</head>
+<body>
+<canvas id="alphaCanvas1" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('alphaCanvas1');
+const ctx = canvas.getContext('2d');
+// Draw a solid background
+ctx.fillStyle = 'lightgray';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+// Set global alpha to 0.5
+ctx.globalAlpha = 0.5;
+// Draw overlapping rectangles in different solid colors
+ctx.fillStyle = 'red';
+ctx.fillRect(30, 50, 100, 80);
+ctx.fillStyle = 'blue';
+ctx.fillRect(80, 50, 100, 80);
+ctx.fillStyle = 'green';
+ctx.fillRect(130, 50, 100, 80);
+// Reset alpha to opaque for subsequent operations
+ctx.globalAlpha = 1.0;
+// Draw a solid rectangle at the bottom
+ctx.fillStyle = 'black';
+ctx.fillRect(0, 180, canvas.width, 20);
+</script>
+</body>
+</html>
