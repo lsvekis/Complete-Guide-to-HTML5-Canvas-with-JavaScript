@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: State Stack</title>
+</head>
+<body>
+  <canvas id="stateCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+  <script>
+    const canvas = document.getElementById('stateCanvas');
+    const ctx = canvas.getContext('2d');
+    // Base fill style
+    ctx.fillStyle = 'black';
+    // 1) First save
+    ctx.save();  
+    ctx.fillStyle = 'red';    // Overriding fillStyle
+    ctx.fillRect(20, 20, 60, 40);
+    ctx.restore();            // Revert to black fillStyle
+    // Now fillStyle is black again
+    ctx.fillRect(100, 20, 60, 40);
+    // 2) Second save
+    ctx.save();
+    ctx.translate(200, 50);
+    ctx.fillStyle = 'blue';
+    ctx.rotate(Math.PI / 6);  // 30 degrees
+    ctx.fillRect(0, 0, 60, 40);
+    ctx.restore();
+    // Finally, check that fillStyle is again black, no rotation or translation
+    ctx.fillRect(300, 20, 60, 40);
+  </script>
+</body>
+</html>
