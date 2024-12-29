@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: XOR Mode</title>
+</head>
+<body>
+<canvas id="xorCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('xorCanvas');
+const ctx = canvas.getContext('2d');
+// Draw first circle normally
+ctx.fillStyle = 'green';
+ctx.beginPath();
+ctx.arc(120, 100, 50, 0, 2*Math.PI);
+ctx.fill();
+// Switch to xor
+ctx.globalCompositeOperation = 'xor';
+// Draw second circle
+ctx.fillStyle = 'blue';
+ctx.beginPath();
+ctx.arc(180, 100, 50, 0, 2*Math.PI);
+ctx.fill();
+/*
+ Overlapping region between green and blue circles becomes transparent.
+ Where they don't overlap, the color remains.
+*/
+</script>
+</body>
+</html>
