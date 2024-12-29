@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Alpha Reduction</title>
+</head>
+<body>
+<canvas id="alphaCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<button id="fadeBtn">Fade Alpha</button>
+<script>
+const canvas = document.getElementById('alphaCanvas');
+const ctx = canvas.getContext('2d');
+// Draw
+ctx.fillStyle = 'purple';
+ctx.fillRect(50,50,200,100);
+document.getElementById('fadeBtn').addEventListener('click', ()=>{
+  let imgData = ctx.getImageData(0,0,400,200);
+  let d = imgData.data;
+  for(let i=0; i<d.length; i+=4){
+    // reduce alpha by half
+    d[i+3] = d[i+3]/2; 
+  }
+  ctx.putImageData(imgData,0,0);
+});
+</script>
+</body>
+</html>
