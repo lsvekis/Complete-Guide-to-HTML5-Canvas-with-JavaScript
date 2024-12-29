@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Invert Colors</title>
+</head>
+<body>
+<canvas id="invertCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<button id="invertBtn">Invert</button>
+<script>
+const canvas = document.getElementById('invertCanvas');
+const ctx = canvas.getContext('2d');
+// Draw initial content
+ctx.fillStyle = 'rgb(200,100,50)';
+ctx.fillRect(0,0,200,300);
+ctx.fillStyle = 'blue';
+ctx.fillRect(200,0,200,300);
+// Invert on button click
+document.getElementById('invertBtn').addEventListener('click', ()=>{
+  const imgData = ctx.getImageData(0,0, canvas.width, canvas.height);
+  const d = imgData.data;
+  for(let i=0; i<d.length; i+=4){
+    d[i]   = 255 - d[i];   // R
+    d[i+1] = 255 - d[i+1]; // G
+    d[i+2] = 255 - d[i+2]; // B
+    // A remains the same
+  }
+  ctx.putImageData(imgData, 0, 0);
+});
+</script>
+</body>
+</html>
