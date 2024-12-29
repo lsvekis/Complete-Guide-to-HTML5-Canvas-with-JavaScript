@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Over vs Behind</title>
+</head>
+<body>
+<canvas id="overBehindCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('overBehindCanvas');
+const ctx = canvas.getContext('2d');
+// Draw a green rectangle
+ctx.fillStyle = 'green';
+ctx.fillRect(20, 50, 100, 80);
+// By default: source-over => draw a blue circle on top
+ctx.fillStyle = 'blue';
+ctx.beginPath();
+ctx.arc(100, 90, 30, 0, Math.PI * 2);
+ctx.fill();
+// Switch to destination-over => new shapes go behind existing
+ctx.globalCompositeOperation = 'destination-over';
+// Draw a red rectangle - it will appear behind the green rect + circle
+ctx.fillStyle = 'red';
+ctx.fillRect(60, 20, 100, 80);
+</script>
+</body>
+</html>
