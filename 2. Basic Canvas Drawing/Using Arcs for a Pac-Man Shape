@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Pac-Man Shape</title>
+</head>
+<body>
+<canvas id="pacmanCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('pacmanCanvas');
+const ctx = canvas.getContext('2d');
+// Draw main Pac-Man body as an arc from 0.25π to 1.75π
+ctx.beginPath();
+ctx.arc(200, 150, 80, 0.25 * Math.PI, 1.75 * Math.PI); // main body
+ctx.lineTo(200, 150); // connect to center to form 'mouth' wedge
+ctx.closePath();
+ctx.fillStyle = 'yellow';
+ctx.fill();
+// Optional: Add an eye using a small arc
+ctx.beginPath();
+ctx.arc(180, 120, 8, 0, 2 * Math.PI);
+ctx.fillStyle = 'black';
+ctx.fill();
+</script>
+</body>
+</html>
