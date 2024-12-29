@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Rectangle Drop Shadow</title>
+</head>
+<body>
+<canvas id="shadowCanvas1" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('shadowCanvas1');
+const ctx = canvas.getContext('2d');
+// Set shadow properties
+ctx.shadowColor = 'rgba(0,0,0,0.5)';
+ctx.shadowBlur = 10;
+ctx.shadowOffsetX = 8;
+ctx.shadowOffsetY = 8;
+// Draw the rectangle
+ctx.fillStyle = 'orange';
+ctx.fillRect(50, 50, 100, 60);
+</script>
+</body>
+</html>
