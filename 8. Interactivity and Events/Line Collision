@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Line Intersection</title>
+</head>
+<body>
+<canvas id="lineCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('lineCanvas');
+const ctx = canvas.getContext('2d');
+// Two lines, each defined by two points
+let line1 = {x1: 50, y1:50, x2: 300, y2:200};
+let line2 = {x1: 30, y1:200, x2: 350, y2:30};
+function drawLines(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Draw line1
+  ctx.beginPath();
+  ctx.moveTo(line1.x1, line1.y1);
+  ctx.lineTo(line1.x2, line1.y2);
+  ctx.strokeStyle = 'blue';
+  ctx.stroke();
+  // Draw line2
+  ctx.beginPath();
+  ctx.moveTo(line2.x1, line2.y1);
+  ctx.lineTo(line2.x2, line2.y2);
+  ctx.strokeStyle = 'green';
+  ctx.stroke();
+  // Check intersection
+  let intersect = getLineIntersection(line1, line2);
+  if(intersect){
+    // draw a circle at intersection
+    ctx.beginPath();
+    ctx.arc(intersect.x, intersect.y, 5, 0, 2*Math.PI);
+    ctx.fillStyle = 'red';
+    ctx.fill();
+  }
+}
+// Basic line intersection formula
+function getLineIntersection(l1, l2){
+  // param approach
+  const denom = (l1.x1 - l1.x2)*(l2.y1 - l2.y2) - (l1.y1 - l1.y2)*(l2.x1 - l2.x2);
+  if (denom === 0) return null; // parallel lines
+  const t = ((l1.x1 - l2.x1)*(l2.y1 - l2.y2) - (l1.y1 - l2.y1)*(l2.x1 - l2.x2)) / denom;
+  const u = ((l1.x1 - l2.x1)*(l1.y1 - l1.y2) - (l1.y1 - l2.y1)*(l1.x1 - l1.x2)) / denom;
+  // check if 0<=t<=1 and 0<=u<=1 => intersection within segments
+  if(t>=0 && t<=1 && u>=0 && u<=1){
+    let ix = l1.x1 + t*(l1.x2 - l1.x1);
+    let iy = l1.y1 + t*(l1.y2 - l1.y1);
+    return {x: ix, y: iy};
+  }
+  return null;
+}
+drawLines();
+</script>
+</body>
+</html>
