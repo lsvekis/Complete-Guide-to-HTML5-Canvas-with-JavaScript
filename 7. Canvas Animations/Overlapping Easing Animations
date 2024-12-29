@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Overlapping Easing</title>
+</head>
+<body>
+<canvas id="overlapCanvas" width="500" height="250" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('overlapCanvas');
+const ctx = canvas.getContext('2d');
+let startTime = null;
+let duration = 3000; // 3 seconds
+// We'll animate two squares: one easing in, one easing out
+let square1StartX = 30, square1EndX = 200;
+let square2StartX = 30, square2EndX = 400;
+function easeIn(t) {
+  // simple power 2
+  return t * t;
+}
+function easeOut(t) {
+  return 1 - (1 - t) * (1 - t);
+}
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  let elapsed = timestamp - startTime;
+  if (elapsed > duration) elapsed = duration;
+  let progress = elapsed / duration;
+  // For square1, use easeIn
+  let eased1 = easeIn(progress);
+  let x1 = square1StartX + (square1EndX - square1StartX) * eased1;
+  // For square2, use easeOut
+  let eased2 = easeOut(progress);
+  let x2 = square2StartX + (square2EndX - square2StartX) * eased2;
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw squares
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(x1, 50, 30, 30);
+  ctx.fillStyle = 'green';
+  ctx.fillRect(x2, 150, 30, 30);
+  // Continue until time is up
+  if (elapsed < duration) {
+    requestAnimationFrame(animate);
+  } else {
+    console.log('Both animations complete');
+  }
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
