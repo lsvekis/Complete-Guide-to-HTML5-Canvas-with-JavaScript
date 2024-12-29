@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Default Canvas Size</title>
+</head>
+<body>
+  <!-- No width or height set; Canvas defaults to 300×150 -->
+  <canvas id="defaultCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById('defaultCanvas');
+    const ctx = canvas.getContext('2d');
+    // Log the default dimensions
+    console.log('Default width:', canvas.width);    // Expect 300
+    console.log('Default height:', canvas.height);  // Expect 150
+    // Draw a simple fill to confirm default size
+    ctx.fillStyle = 'lightblue';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  </script>
+</body>
+</html>
