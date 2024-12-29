@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Blended Video & Image</title>
+</head>
+<body>
+<canvas id="blendCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<video id="overlayVid" width="400" height="300" muted autoplay loop style="display:none">
+  <source src="sample.mp4" type="video/mp4">
+</video>
+<script>
+const canvas = document.getElementById('blendCanvas');
+const ctx = canvas.getContext('2d');
+const video = document.getElementById('overlayVid');
+const bg = new Image();
+bg.src = 'https://via.placeholder.com/500x300';
+bg.onload = ()=>{
+  animate();
+};
+function animate(){
+  // Draw background image
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.globalAlpha = 1;
+  ctx.drawImage(bg, 0,0, 500, 300);
+  if(!video.paused && !video.ended) {
+    // blend the video
+    ctx.globalAlpha = 0.5;
+    ctx.globalCompositeOperation = 'lighter'; 
+    // or 'screen' if you prefer a different effect
+    ctx.drawImage(video, 50,0, 400,300);
+  }
+  requestAnimationFrame(animate);
+}
+</script>
+</body>
+</html>
