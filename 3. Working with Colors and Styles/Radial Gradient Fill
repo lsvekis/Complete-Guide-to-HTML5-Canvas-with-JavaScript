@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Radial Gradient</title>
+</head>
+<body>
+<canvas id="gradientCanvas" width="300" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('gradientCanvas');
+const ctx = canvas.getContext('2d');
+// Create a radial gradient: inner circle at (150,150) radius 20, outer circle radius 100
+const gradient = ctx.createRadialGradient(150, 150, 20, 150, 150, 100);
+gradient.addColorStop(0, 'white');
+gradient.addColorStop(0.5, 'purple');
+gradient.addColorStop(1, 'black');
+// Draw a circle with the radial gradient
+ctx.beginPath();
+ctx.arc(150, 150, 100, 0, 2 * Math.PI);
+ctx.fillStyle = gradient;
+ctx.fill();
+</script>
+</body>
+</html>
