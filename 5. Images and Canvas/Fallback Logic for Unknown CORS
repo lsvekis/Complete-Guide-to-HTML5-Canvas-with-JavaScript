@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Fallback CrossOrigin</title>
+</head>
+<body>
+<canvas id="fallbackCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('fallbackCanvas');
+const ctx = canvas.getContext('2d');
+const corsImg = new Image();
+corsImg.crossOrigin = 'anonymous';
+corsImg.src = 'https://cdn.example.com/image-with-unknown-cors.jpg';
+corsImg.onload = () => {
+  // Attempt to draw
+  ctx.drawImage(corsImg, 0, 0);
+  // Test if we can read pixels
+  try {
+    const pixel = ctx.getImageData(10, 10, 1, 1);
+    console.log('CORS image loaded successfully; canvas not tainted.');
+  } catch (err) {
+    console.warn('Canvas is tainted, fallback logic triggered:', err);
+    loadFallbackImage();
+  }
+};
+corsImg.onerror = () => {
+  console.warn('Failed to load cross-origin image, fallback...');
+  loadFallbackImage();
+};
+function loadFallbackImage() {
+  const fallback = new Image();
+  fallback.src = '/images/localBackup.jpg';
+  fallback.onload = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(fallback, 50, 50);
+    console.log('Fallback image displayed.');
+  };
+}
+</script>
+</body>
+</html>
