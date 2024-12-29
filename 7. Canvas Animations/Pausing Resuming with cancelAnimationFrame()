@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Cancel and Resume</title>
+</head>
+<body>
+<canvas id="cancelCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<button id="startBtn">Start</button>
+<button id="stopBtn">Stop</button>
+<script>
+const canvas = document.getElementById('cancelCanvas');
+const ctx = canvas.getContext('2d');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+let animId = null;
+let xPos = 0;
+function animate() {
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw
+  ctx.fillStyle = 'purple';
+  ctx.fillRect(xPos, 80, 40, 40);
+  // Update
+  xPos += 2;
+  if (xPos > canvas.width) xPos = -40;
+  animId = requestAnimationFrame(animate);
+}
+// Start animation
+startBtn.addEventListener('click', () => {
+  if (!animId) {
+    animId = requestAnimationFrame(animate);
+  }
+});
+// Stop animation
+stopBtn.addEventListener('click', () => {
+  if (animId) {
+    cancelAnimationFrame(animId);
+    animId = null;
+  }
+});
+</script>
+</body>
+</html>
