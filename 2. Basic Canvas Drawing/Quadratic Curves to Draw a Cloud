@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Cloud Shape</title>
+</head>
+<body>
+<canvas id="cloudCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('cloudCanvas');
+const ctx = canvas.getContext('2d');
+// Start path
+ctx.beginPath();
+ctx.moveTo(100, 150);
+// Left puff (quadratic curve)
+ctx.quadraticCurveTo(80, 110, 130, 110);
+// Top puff
+ctx.quadraticCurveTo(160, 80, 190, 110);
+// Right puff
+ctx.quadraticCurveTo(250, 110, 240, 150);
+// Bottom line to close
+ctx.quadraticCurveTo(200, 170, 100, 150);
+ctx.closePath();
+// Fill and stroke
+ctx.fillStyle = 'white';
+ctx.fill();
+ctx.strokeStyle = 'gray';
+ctx.lineWidth = 2;
+ctx.stroke();
+</script>
+</body>
+</html>
