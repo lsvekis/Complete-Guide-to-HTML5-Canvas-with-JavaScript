@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Fade-In (Ease-In)</title>
+</head>
+<body>
+<canvas id="fadeInCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('fadeInCanvas');
+const ctx = canvas.getContext('2d');
+let startTime = null;
+const duration = 3000; // 3 seconds
+function easeInCubic(t) {
+  return t * t * t;
+}
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  let elapsed = timestamp - startTime;
+  if (elapsed > duration) elapsed = duration;
+  let progress = elapsed / duration;
+  let alpha = easeInCubic(progress);
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw with alpha
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = 'orange';
+  ctx.fillRect(100, 50, 200, 100);
+  ctx.restore();
+  if (elapsed < duration) {
+    requestAnimationFrame(animate);
+  }
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
