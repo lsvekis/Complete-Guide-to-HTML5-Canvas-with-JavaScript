@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Layered Animations</title>
+</head>
+<body>
+<canvas id="layerCanvas" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('layerCanvas');
+const ctx = canvas.getContext('2d');
+// Example: Two layers (background swirl & moving shape)
+let swirlAngle = 0;
+let shapeX = 0;
+function update(delta) {
+  swirlAngle += delta * 0.5; // swirl changes slowly
+  shapeX += delta * 100;     // shape moves faster
+  if (shapeX > canvas.width) shapeX = 0;
+}
+function draw() {
+  // Background swirl
+  ctx.save();
+  ctx.fillStyle = 'lightblue';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate(swirlAngle);
+  ctx.beginPath();
+  ctx.arc(0, 0, 80, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 10;
+  ctx.stroke();
+  ctx.restore();
+  // Foreground shape
+  ctx.fillStyle = 'green';
+  ctx.fillRect(shapeX, canvas.height - 50, 40, 40);
+}
+let lastTime = 0;
+function animate(t) {
+  if (!lastTime) lastTime = t;
+  const deltaSec = (t - lastTime) / 1000;
+  lastTime = t;
+  update(deltaSec);
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  draw();
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
