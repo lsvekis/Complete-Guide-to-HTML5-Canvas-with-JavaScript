@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Console Logging Coordinates</title>
+</head>
+<body>
+<canvas id="coordCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('coordCanvas');
+const ctx = canvas.getContext('2d');
+// background
+ctx.fillStyle='white';
+ctx.fillRect(0,0,400,200);
+canvas.addEventListener('click',(e)=>{
+  const rect=canvas.getBoundingClientRect();
+  const x=e.clientX - rect.left;
+  const y=e.clientY - rect.top;
+  // debug log
+  console.log(`Clicked at canvas coords (${x}, ${y})`);
+  // draw small circle
+  ctx.fillStyle='red';
+  ctx.beginPath();
+  ctx.arc(x, y,5,0,2*Math.PI);
+  ctx.fill();
+});
+</script>
+</body>
+</html>
