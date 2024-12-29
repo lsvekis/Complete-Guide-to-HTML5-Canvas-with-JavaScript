@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Exercise 4</title>
+</head>
+<body>
+  <canvas id="textCanvas" width="400" height="200"></canvas>
+  <script>
+    const canvas = document.getElementById('textCanvas');
+    const ctx = canvas.getContext('2d');
+    // Set the font style
+    ctx.font = '30px Verdana';
+    // Fill text
+    ctx.fillStyle = 'blue';
+    ctx.fillText('Hello, Canvas!', 20, 60);
+    // Stroke text
+    ctx.strokeStyle = 'green';
+    ctx.lineWidth = 1;
+    ctx.strokeText('Outlined Text', 20, 120);
+  </script>
+</body>
+</html>
