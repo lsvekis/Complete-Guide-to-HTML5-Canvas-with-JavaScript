@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Horizontal Flip</title>
+</head>
+<body>
+<canvas id="flipCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('flipCanvas');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+img.src = 'https://via.placeholder.com/150x80?text=Flip+Me';
+img.onload = () => {
+  // Draw normal image at left side
+  ctx.drawImage(img, 20, 60);
+  // Flip horizontally about the vertical axis at x=280 (for demonstration)
+  ctx.save();
+  // Move the origin to x=280
+  ctx.translate(280, 0);
+  // Scale x by -1 to flip horizontally
+  ctx.scale(-1, 1);
+  // Now when we draw at 0,60, it is effectively at x=280, y=60,
+  // but flipped horizontally
+  ctx.drawImage(img, 0, 60);
+  ctx.restore();
+};
+</script>
+</body>
+</html>
