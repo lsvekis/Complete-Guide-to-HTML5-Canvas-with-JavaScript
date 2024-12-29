@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Rotating Text</title>
+</head>
+<body>
+<canvas id="rotateCanvas3" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('rotateCanvas3');
+const ctx = canvas.getContext('2d');
+// Draw axis
+ctx.moveTo(50, 250);
+ctx.lineTo(350, 250);
+ctx.strokeStyle = 'black';
+ctx.stroke();
+ctx.font = '16px Arial';
+ctx.fillStyle = 'blue';
+// We'll draw text at increments along this axis, each label rotated -45° for a slanted effect
+const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
+labels.forEach((label, i) => {
+  let x = 60 + i * 60;
+  let y = 250;
+  // Save, transform, draw text, restore
+  ctx.save();
+  ctx.translate(x, y);
+  // rotate -45 degrees
+  ctx.rotate(-Math.PI / 4);
+  ctx.fillText(label, 0, 0);
+  ctx.restore();
+});
+</script>
+</body>
+</html>
