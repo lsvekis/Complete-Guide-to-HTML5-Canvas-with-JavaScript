@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Reuse Offscreen Canvas</title>
+</head>
+<body>
+<canvas id="mainMemCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const main = document.getElementById('mainMemCanvas');
+const mCtx = main.getContext('2d');
+const off = document.createElement('canvas');
+off.width=400; off.height=300;
+const oCtx= off.getContext('2d');
+// We'll use the same offscreen for multiple frames
+function drawFrame(){
+  // clear offscreen
+  oCtx.clearRect(0,0,400,300);
+  // draw random shape
+  oCtx.fillStyle= 'blue';
+  oCtx.fillRect(Math.random()*300, Math.random()*200,50,50);
+  // copy to main
+  mCtx.drawImage(off,0,0);
+}
+setInterval(drawFrame, 1000);
+</script>
+</body>
+</html>
