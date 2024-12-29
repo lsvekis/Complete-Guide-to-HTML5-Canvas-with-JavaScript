@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Setup: Exercise 4</title>
+  <style>
+    /* We'll display the canvas at 300x150 visually */
+    #hdCanvas {
+      width: 300px;
+      height: 150px;
+      border: 1px solid #ccc;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="hdCanvas"></canvas>
+<script>
+  const canvas = document.getElementById('hdCanvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  // We'll define a "base" width and height
+  const baseWidth = 300;
+  const baseHeight = 150;
+  // Set the actual canvas resolution scaled by the device pixel ratio
+  canvas.width = baseWidth * dpr;
+  canvas.height = baseHeight * dpr;
+  // Ensure the canvas is displayed at the normal size in CSS
+  canvas.style.width = baseWidth + 'px';
+  canvas.style.height = baseHeight + 'px';
+  // Scale the context so 1 unit = 1 CSS pixel
+  ctx.scale(dpr, dpr);
+  // Test by drawing text
+  ctx.font = '20px Arial';
+  ctx.fillStyle = 'blue';
+  ctx.fillText('High-DPI Canvas!', 10, 30);
+</script>
+</body>
+</html>
