@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Bouncing Ball (Time-Based)</title>
+</head>
+<body>
+<canvas id="bounceCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('bounceCanvas');
+const ctx = canvas.getContext('2d');
+let lastTime = 0;
+// Ball properties
+let y = 50;          // initial position
+let vy = 0;          // velocity
+const gravity = 300; // downward acceleration (px/sec^2)
+const radius = 15;
+const bounceFactor = 0.7;
+function animate(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  let deltaSec = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  // Update
+  vy += gravity * deltaSec; // apply gravity
+  y += vy * deltaSec;
+  // Check floor collision
+  if (y + radius > canvas.height) {
+    y = canvas.height - radius;
+    vy = -vy * bounceFactor; // bounce back with reduced speed
+  }
+  // Clear and draw
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.arc(canvas.width / 2, y, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = 'purple';
+  ctx.fill();
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
