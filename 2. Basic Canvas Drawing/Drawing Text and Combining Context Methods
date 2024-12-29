@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Text & Context Methods</title>
+</head>
+<body>
+  <canvas id="textCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+  <script>
+    const canvas = document.getElementById('textCanvas');
+    const ctx = canvas.getContext('2d');
+    // Draw background
+    ctx.fillStyle = 'lightgray';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Create a path-based banner
+    ctx.beginPath();
+    ctx.moveTo(50, 100);
+    ctx.lineTo(100, 80);
+    ctx.lineTo(350, 80);
+    ctx.lineTo(350, 120);
+    ctx.lineTo(100, 120);
+    ctx.closePath();
+    ctx.fillStyle = 'lightblue';
+    ctx.fill();
+    // Rotate context slightly and draw text
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(-Math.PI / 36); // rotate -5 degrees
+    ctx.font = '24px Arial';
+    ctx.fillStyle = 'darkblue';
+    ctx.textAlign = 'center';
+    ctx.fillText('Hello from Canvas 2D Context!', 0, 0);
+    ctx.restore();
+  </script>
+</body>
+</html>
