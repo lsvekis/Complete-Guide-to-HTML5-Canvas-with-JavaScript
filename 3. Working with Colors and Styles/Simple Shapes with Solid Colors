@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Solid Colors</title>
+</head>
+<body>
+<canvas id="canvas1" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('canvas1');
+const ctx = canvas.getContext('2d');
+// Filled rectangle (red)
+ctx.fillStyle = 'red';
+ctx.fillRect(20, 20, 100, 80);
+// Outlined rectangle (blue)
+ctx.strokeStyle = 'blue';
+ctx.lineWidth = 4;
+ctx.strokeRect(150, 20, 100, 80);
+</script>
+</body>
+</html>
