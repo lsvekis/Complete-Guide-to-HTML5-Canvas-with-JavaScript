@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Read Pixel on Click</title>
+</head>
+<body>
+<canvas id="pixelCanvas1" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('pixelCanvas1');
+const ctx = canvas.getContext('2d');
+// Fill with a simple gradient
+let grad = ctx.createLinearGradient(0,0, 400,0);
+grad.addColorStop(0, 'red');
+grad.addColorStop(1, 'blue');
+ctx.fillStyle = grad;
+ctx.fillRect(0,0,400,300);
+// Listen for clicks
+canvas.addEventListener('click', (e)=>{
+  const rect = canvas.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  // getImageData
+  const imgData = ctx.getImageData(x, y, 1, 1);
+  const data = imgData.data; // [R,G,B,A]
+  console.log(`Pixel at (${x}, ${y}): R=${data[0]}, G=${data[1]}, B=${data[2]}, A=${data[3]}`);
+});
+</script>
+</body>
+</html>
