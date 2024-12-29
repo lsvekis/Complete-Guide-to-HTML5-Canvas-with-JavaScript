@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: clearRect Demonstration</title>
+</head>
+<body>
+<canvas id="clearCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+  const canvas = document.getElementById('clearCanvas');
+  const ctx = canvas.getContext('2d');
+  // Fill the entire canvas
+  ctx.fillStyle = 'purple';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Clear a rectangular area in the center
+  ctx.clearRect(100, 50, 200, 100);
+</script>
+</body>
+</html>
