@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head><title>Exercise 1: Collecting Items</title></head>
+<body>
+<canvas id="gameCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+let player = { x:50, y:50, r:10, speed:2 };
+let coins = [];
+for(let i=0;i<5;i++){
+  coins.push({
+    x: Math.random()*480+10,
+    y: Math.random()*280+10,
+    r: 8,
+    collected:false
+  });
+}
+let score=0;
+const keys={};
+document.addEventListener('keydown',(e)=>{ keys[e.key] = true; });
+document.addEventListener('keyup',(e)=>{ keys[e.key] = false; });
+function update(){
+  if(keys['ArrowUp']) player.y -= player.speed;
+  if(keys['ArrowDown']) player.y += player.speed;
+  if(keys['ArrowLeft']) player.x -= player.speed;
+  if(keys['ArrowRight']) player.x += player.speed;
+  // collect checks
+  for(let c of coins){
+    if(!c.collected){
+      let dx=c.x - player.x, dy=c.y - player.y;
+      let dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < c.r+player.r){
+        c.collected=true;
+        score++;
+      }
+    }
+  }
+}
+function draw(){
+  ctx.clearRect(0,0,500,300);
+  // Player
+  ctx.fillStyle='blue';
+  ctx.beginPath();
+  ctx.arc(player.x, player.y, player.r, 0, 2*Math.PI);
+  ctx.fill();
+  // coins
+  ctx.fillStyle='gold';
+  for(let c of coins){
+    if(!c.collected){
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.r, 0, 2*Math.PI);
+      ctx.fill();
+    }
+  }
+  // score
+  ctx.fillStyle='black';
+  ctx.fillText(`Score: ${score}`, 10, 20);
+}
+function loop(){
+  update();
+  draw();
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>
