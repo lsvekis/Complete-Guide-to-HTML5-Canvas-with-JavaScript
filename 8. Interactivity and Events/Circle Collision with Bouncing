@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Circle Collision & Bounce</title>
+</head>
+<body>
+<canvas id="circleCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('circleCanvas');
+const ctx = canvas.getContext('2d');
+// Two circles
+let c1 = { x:100, y:150, r:20, vx:2, vy:1, color:'orange' };
+let c2 = { x:400, y:120, r:30, vx:-1, vy:1.5, color:'purple' };
+function distance(ax, ay, bx, by) {
+  return Math.sqrt((bx-ax)*(bx-ax) + (by-ay)*(by-ay));
+}
+function animate() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Move circles
+  c1.x += c1.vx; c1.y += c1.vy;
+  c2.x += c2.vx; c2.y += c2.vy;
+  // Check wall collisions & bounce
+  checkWallBounce(c1);
+  checkWallBounce(c2);
+  // Check circle collision
+  let dist = distance(c1.x, c1.y, c2.x, c2.y);
+  if (dist < c1.r + c2.r) {
+    // Simple bounce: invert both velocities
+    c1.vx = -c1.vx;
+    c1.vy = -c1.vy;
+    c2.vx = -c2.vx;
+    c2.vy = -c2.vy;
+  }
+  // Draw
+  drawCircle(c1);
+  drawCircle(c2);
+  requestAnimationFrame(animate);
+}
+function drawCircle(c) {
+  ctx.beginPath();
+  ctx.arc(c.x, c.y, c.r, 0, 2*Math.PI);
+  ctx.fillStyle = c.color;
+  ctx.fill();
+}
+function checkWallBounce(c) {
+  // bounce horizontally
+  if (c.x - c.r < 0 || c.x + c.r > canvas.width) {
+    c.vx = -c.vx;
+  }
+  // bounce vertically
+  if (c.y - c.r < 0 || c.y + c.r > canvas.height) {
+    c.vy = -c.vy;
+  }
+}
+animate();
+</script>
+</body>
+</html>
