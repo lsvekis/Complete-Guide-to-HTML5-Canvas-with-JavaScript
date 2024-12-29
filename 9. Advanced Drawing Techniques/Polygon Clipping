@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Star Clipping</title>
+</head>
+<body>
+<canvas id="clipCanvas2" width="400" height="400" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('clipCanvas2');
+const ctx = canvas.getContext('2d');
+function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
+  let rot = Math.PI / 2 * 3;
+  let x = cx;
+  let y = cy;
+  let step = Math.PI / spikes;
+  ctx.beginPath();
+  for (let i = 0; i < spikes; i++) {
+    x = cx + Math.cos(rot) * outerRadius;
+    y = cy + Math.sin(rot) * outerRadius;
+    ctx.lineTo(x, y);
+    rot += step;
+    x = cx + Math.cos(rot) * innerRadius;
+    y = cy + Math.sin(rot) * innerRadius;
+    ctx.lineTo(x, y);
+    rot += step;
+  }
+  ctx.closePath();
+}
+function main() {
+  // Draw star path
+  drawStar(ctx, 200, 200, 5, 100, 50);
+  // Clip
+  ctx.clip();
+  // Now fill a radial gradient behind the star
+  let grad = ctx.createRadialGradient(200,200,20, 200,200,200);
+  grad.addColorStop(0, 'purple');
+  grad.addColorStop(1, 'yellow');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,400,400);
+}
+main();
+</script>
+</body>
+</html>
