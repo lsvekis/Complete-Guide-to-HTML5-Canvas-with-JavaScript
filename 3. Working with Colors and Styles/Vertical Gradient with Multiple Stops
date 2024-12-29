@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Multi-Stop Vertical Gradient</title>
+</head>
+<body>
+<canvas id="verticalCanvas" width="200" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('verticalCanvas');
+const ctx = canvas.getContext('2d');
+// Create a vertical gradient
+const vertGrad = ctx.createLinearGradient(0, 0, 0, 300);
+vertGrad.addColorStop(0, 'red');
+vertGrad.addColorStop(0.3, 'orange');
+vertGrad.addColorStop(0.6, 'yellow');
+vertGrad.addColorStop(1, 'white');
+// Fill background with gradient
+ctx.fillStyle = vertGrad;
+ctx.fillRect(0, 0, 200, 300);
+</script>
+</body>
+</html>
