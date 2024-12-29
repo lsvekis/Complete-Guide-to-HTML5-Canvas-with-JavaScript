@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Negative Translate (Scrolling)</title>
+</head>
+<body>
+<canvas id="scrollCanvas" width="500" height="150" style="border:1px solid #ccc;"></canvas>
+<button id="scrollLeft">Scroll Left</button>
+<button id="scrollRight">Scroll Right</button>
+<script>
+const canvas = document.getElementById('scrollCanvas');
+const ctx = canvas.getContext('2d');
+let scrollX = 0;
+// Draw a simple background pattern
+function drawScene() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Translate negatively by scrollX
+  ctx.save();
+  ctx.translate(-scrollX, 0);
+  // Draw multiple circles across a wide area
+  for (let x = 0; x < 1000; x += 50) {
+    ctx.beginPath();
+    ctx.arc(x + 25, 75, 20, 0, 2*Math.PI);
+    ctx.fillStyle = (x / 50) % 2 === 0 ? 'orange' : 'skyblue';
+    ctx.fill();
+  }
+  ctx.restore();
+}
+drawScene();
+document.getElementById('scrollLeft').addEventListener('click', () => {
+  scrollX += 50; // move "camera" left
+  drawScene();
+});
+document.getElementById('scrollRight').addEventListener('click', () => {
+  scrollX -= 50; // move "camera" right
+  if (scrollX < 0) scrollX = 0; // don't go negative for demonstration
+  drawScene();
+});
+</script>
+</body>
+</html>
