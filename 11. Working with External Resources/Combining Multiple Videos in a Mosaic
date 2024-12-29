@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Video Mosaic</title>
+</head>
+<body>
+<video id="vidA" width="320" height="180" muted autoplay loop style="display:none">
+  <source src="videoA.mp4" type="video/mp4">
+</video>
+<video id="vidB" width="320" height="180" muted autoplay loop style="display:none">
+  <source src="videoB.mp4" type="video/mp4">
+</video>
+<canvas id="mosaicCanvas" width="640" height="180" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('mosaicCanvas');
+const ctx = canvas.getContext('2d');
+const vidA = document.getElementById('vidA');
+const vidB = document.getElementById('vidB');
+function renderMosaic() {
+  // left half: vidA
+  if(!vidA.paused && !vidA.ended) {
+    ctx.drawImage(vidA, 0,0, 320,180);
+  }
+  // right half: vidB
+  if(!vidB.paused && !vidB.ended) {
+    ctx.drawImage(vidB, 320,0, 320,180);
+  }
+  requestAnimationFrame(renderMosaic);
+}
+vidA.addEventListener('play', ()=>{
+  requestAnimationFrame(renderMosaic);
+});
+vidB.addEventListener('play', ()=>{
+  requestAnimationFrame(renderMosaic);
+});
+</script>
+</body>
+</html>
