@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Multiple Line Segments</title>
+</head>
+<body>
+<canvas id="lineCanvas2" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('lineCanvas2');
+const ctx = canvas.getContext('2d');
+ctx.beginPath();
+ctx.moveTo(50, 50);
+ctx.lineTo(150, 50);
+ctx.lineTo(150, 150);
+ctx.lineTo(50, 150);
+// Set stroke properties
+ctx.strokeStyle = 'green';
+ctx.lineWidth = 5;
+ctx.lineCap = 'round';    // Round endpoints
+ctx.lineJoin = 'round';   // Round corners
+ctx.stroke();
+</script>
+</body>
+</html>
