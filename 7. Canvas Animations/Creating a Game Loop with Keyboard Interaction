@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Game Loop with Input</title>
+</head>
+<body>
+<canvas id="gameCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+let playerX = 200;
+let playerY = 100;
+const speed = 3;
+const width = 40;
+const height = 40;
+const keys = {
+  ArrowUp: false,
+  ArrowDown: false,
+  ArrowLeft: false,
+  ArrowRight: false
+};
+document.addEventListener('keydown', (e) => {
+  if (keys.hasOwnProperty(e.key)) {
+    keys[e.key] = true;
+  }
+});
+document.addEventListener('keyup', (e) => {
+  if (keys.hasOwnProperty(e.key)) {
+    keys[e.key] = false;
+  }
+});
+function animate() {
+  // Update player position based on keys
+  if (keys.ArrowLeft) playerX -= speed;
+  if (keys.ArrowRight) playerX += speed;
+  if (keys.ArrowUp) playerY -= speed;
+  if (keys.ArrowDown) playerY += speed;
+  // Boundaries
+  if (playerX < 0) playerX = 0;
+  if (playerY < 0) playerY = 0;
+  if (playerX + width > canvas.width) playerX = canvas.width - width;
+  if (playerY + height > canvas.height) playerY = canvas.height - height;
+  // Draw
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'green';
+  ctx.fillRect(playerX, playerY, width, height);
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
