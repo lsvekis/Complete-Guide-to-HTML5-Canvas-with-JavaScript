@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: CrossOrigin Anonymous</title>
+</head>
+<body>
+<canvas id="corsCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<button id="exportCorsBtn">Export Canvas Safely</button>
+<script>
+const canvas = document.getElementById('corsCanvas');
+const ctx = canvas.getContext('2d');
+const exportBtn = document.getElementById('exportCorsBtn');
+// A hypothetical image server that sets Access-Control-Allow-Origin: *
+const safeImg = new Image();
+safeImg.crossOrigin = 'anonymous'; // must set this before .src
+safeImg.src = 'https://my-cors-enabled-server.com/path/to/image.jpg';
+safeImg.onload = () => {
+  ctx.drawImage(safeImg, 0, 0);
+};
+exportBtn.addEventListener('click', () => {
+  // Should work if the server truly allows cross-origin
+  try {
+    const dataURL = canvas.toDataURL('image/png');
+    console.log('Canvas exported successfully:', dataURL);
+  } catch (err) {
+    console.error('Error exporting canvas:', err);
+  }
+});
+</script>
+</body>
+</html>
