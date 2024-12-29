@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: 2D as WebGL Texture</title>
+</head>
+<body>
+<canvas id="mainGL" width="400" height="300"></canvas>
+<script>
+// create an offscreen 2D canvas
+const offscreen = document.createElement('canvas');
+offscreen.width = 128;
+offscreen.height = 128;
+const offCtx = offscreen.getContext('2d');
+// draw dynamic pattern
+offCtx.fillStyle = 'blue';
+offCtx.fillRect(0,0,128,128);
+offCtx.fillStyle = 'yellow';
+offCtx.fillRect(50,50,30,30);
+// Now set up WebGL
+const glCanvas = document.getElementById('mainGL');
+const gl = glCanvas.getContext('webgl');
+// ... minimal init ...
+// create texture from the offscreen canvas
+const tex = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, tex);
+gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, offscreen);
+// set tex params
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+// proceed with drawing a textured quad...
+// skipping full pipeline for brevity
+gl.clearColor(0,0,0,1);
+gl.clear(gl.COLOR_BUFFER_BIT);
+// For demonstration: We have the 2D canvas content as a texture
+</script>
+</body>
+</html>
