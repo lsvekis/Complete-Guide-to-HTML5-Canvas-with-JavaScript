@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Translucent Shape & Shadow</title>
+</head>
+<body>
+<canvas id="alphaShadowCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('alphaShadowCanvas');
+const ctx = canvas.getContext('2d');
+// Slightly transparent shape
+ctx.globalAlpha = 0.7;
+// Shadow
+ctx.shadowColor = 'rgba(0,0,0,0.8)';
+ctx.shadowBlur = 15;
+ctx.shadowOffsetX = 4;
+ctx.shadowOffsetY = 4;
+// Draw circle
+ctx.fillStyle = 'blue';
+ctx.beginPath();
+ctx.arc(100, 100, 50, 0, 2*Math.PI);
+ctx.fill();
+// Another shape
+ctx.fillStyle = 'red';
+ctx.beginPath();
+ctx.arc(220, 100, 30, 0, 2*Math.PI);
+ctx.fill();
+</script>
+</body>
+</html>
