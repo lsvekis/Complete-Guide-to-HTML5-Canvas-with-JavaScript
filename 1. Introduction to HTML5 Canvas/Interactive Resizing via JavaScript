@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: JS Resizing</title>
+  <style>
+    #dynamicCanvas {
+      border: 1px solid #ccc;
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<canvas id="dynamicCanvas" width="300" height="150"></canvas>
+<button id="resizeBtn">Resize to 500×300</button>
+<script>
+  const canvas = document.getElementById('dynamicCanvas');
+  const ctx = canvas.getContext('2d');
+  const resizeBtn = document.getElementById('resizeBtn');
+  // Initial draw
+  ctx.fillStyle = 'lightgreen';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  resizeBtn.addEventListener('click', () => {
+    canvas.width = 500;  // This clears the canvas
+    canvas.height = 300;
+    // Draw again after resize
+    ctx.fillStyle = 'lightgreen';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  });
+</script>
+</body>
+</html>
