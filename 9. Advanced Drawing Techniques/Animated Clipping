@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Animated Scrolling Clip</title>
+</head>
+<body>
+<canvas id="clipCanvas3" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('clipCanvas3');
+const ctx = canvas.getContext('2d');
+let clipWidth = 0;
+function animate() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Save context
+  ctx.save();
+  // Draw the clip region (rectangle of width=clipWidth)
+  ctx.beginPath();
+  ctx.rect(0, 0, clipWidth, canvas.height);
+  ctx.clip();
+  // Now fill entire canvas with some pattern or color
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Restore
+  ctx.restore();
+  // Update clipWidth for next frame
+  clipWidth += 2;
+  if (clipWidth > canvas.width) clipWidth = canvas.width;
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
