@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Batching Styles</title>
+</head>
+<body>
+<canvas id="batchCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('batchCanvas');
+const ctx = canvas.getContext('2d');
+let redRects=[], blueRects=[];
+for(let i=0; i<50; i++){
+  redRects.push({x:Math.random()*450, y:Math.random()*250, w:20, h:20});
+  blueRects.push({x:Math.random()*450, y:Math.random()*250, w:20, h:20});
+}
+function drawAll(){
+  ctx.clearRect(0,0,500,300);
+  // draw red batch
+  ctx.fillStyle='red';
+  for(let r of redRects){
+    ctx.fillRect(r.x, r.y, r.w, r.h);
+  }
+  // draw blue batch
+  ctx.fillStyle='blue';
+  for(let b of blueRects){
+    ctx.fillRect(b.x, b.y, b.w, b.h);
+  }
+}
+drawAll();
+</script>
+</body>
+</html>
