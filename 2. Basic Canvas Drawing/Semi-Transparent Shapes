@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Transparency with fillStyle</title>
+</head>
+<body>
+<canvas id="alphaCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('alphaCanvas');
+const ctx = canvas.getContext('2d');
+// First shape (blue with 50% opacity)
+ctx.fillStyle = 'rgba(0, 0, 255, 0.5)';
+ctx.fillRect(30, 30, 100, 100);
+// Second shape (red with 50% opacity), overlapping the first
+ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+ctx.fillRect(80, 30, 100, 100);
+</script>
+</body>
+</html>
