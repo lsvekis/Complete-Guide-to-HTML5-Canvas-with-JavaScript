@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: textBaseline</title>
+</head>
+<body>
+<canvas id="baselineCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('baselineCanvas');
+const ctx = canvas.getContext('2d');
+const baseX = 50;
+const baseY = 150;
+// Draw a horizontal reference line
+ctx.beginPath();
+ctx.moveTo(0, baseY);
+ctx.lineTo(canvas.width, baseY);
+ctx.strokeStyle = 'gray';
+ctx.stroke();
+const baselines = ["top", "hanging", "middle", "alphabetic", "ideographic", "bottom"];
+ctx.font = "24px Arial";
+ctx.fillStyle = "black";
+baselines.forEach((b, i) => {
+  ctx.textBaseline = b;
+  ctx.fillText(b, baseX + i * 80, baseY);
+});
+</script>
+</body>
+</html>
