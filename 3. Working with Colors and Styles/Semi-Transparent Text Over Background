@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Transparent Text</title>
+</head>
+<body>
+<canvas id="alphaCanvas5" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('alphaCanvas5');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+img.src = 'https://via.placeholder.com/500x300'; // A sample placeholder
+img.onload = () => {
+  // Draw background image
+  ctx.drawImage(img, 0, 0);
+  // Set globalAlpha for text
+  ctx.globalAlpha = 0.6;
+  ctx.font = 'bold 48px Arial';
+  ctx.fillStyle = 'white';
+  ctx.fillText('Hello Canvas!', 50, 150);
+  // Reset alpha for a small label
+  ctx.globalAlpha = 1.0;
+  ctx.font = '16px Arial';
+  ctx.fillStyle = 'yellow';
+  ctx.fillText('A semi-transparent greeting', 50, 180);
+};
+</script>
+</body>
+</html>
