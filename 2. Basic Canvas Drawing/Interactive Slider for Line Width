@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Line Width Slider</title>
+  <style>
+    #controls { margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+<div id="controls">
+  <label for="widthSlider">Line Width:</label>
+  <input type="range" id="widthSlider" min="1" max="20" value="3">
+</div>
+<canvas id="dynamicCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('dynamicCanvas');
+const ctx = canvas.getContext('2d');
+const widthSlider = document.getElementById('widthSlider');
+// We'll keep track of the last position to draw continuous lines
+let lastX, lastY;
+let isDrawing = false;
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+canvas.addEventListener('mousemove', (e) => {
+  if(!isDrawing) return;
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.strokeStyle = 'purple';
+  ctx.lineWidth = widthSlider.value;
+  ctx.stroke();
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+</script>
+</body>
+</html>
