@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Fill and Stroke</title>
+</head>
+<body>
+<canvas id="rectCanvas" width="400" height="150" style="border:1px solid #ccc;"></canvas>
+<script>
+  const canvas = document.getElementById('rectCanvas');
+  const ctx = canvas.getContext('2d');
+  // Filled rectangle
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(20, 20, 100, 60);
+  // Outlined rectangle
+  ctx.strokeStyle = 'red';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(160, 20, 100, 60);
+</script>
+</body>
+</html>
