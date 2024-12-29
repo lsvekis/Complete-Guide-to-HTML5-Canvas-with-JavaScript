@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Path Animation</title>
+</head>
+<body>
+<canvas id="pathCanvas" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('pathCanvas');
+const ctx = canvas.getContext('2d');
+let lastTime = 0;
+let distanceTraveled = 0; 
+const speed = 100; // px/sec
+const radius = 10;
+// We'll define a function y = 100 + 50*sin(x/30)
+function getY(x) {
+  return 100 + 50 * Math.sin(x / 30);
+}
+function animate(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const deltaSec = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  // Move a certain distance along x each frame
+  distanceTraveled += speed * deltaSec;
+  if (distanceTraveled > canvas.width) distanceTraveled = 0;
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw path (optional)
+  ctx.beginPath();
+  for (let x = 0; x < canvas.width; x += 1) {
+    let y = getY(x);
+    if (x === 0) {
+      ctx.moveTo(x, y);
+    } else {
+      ctx.lineTo(x, y);
+    }
+  }
+  ctx.strokeStyle = 'lightgray';
+  ctx.stroke();
+  // Get circle's position
+  const circleX = distanceTraveled;
+  const circleY = getY(circleX);
+  // Draw circle
+  ctx.beginPath();
+  ctx.arc(circleX, circleY, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = 'blue';
+  ctx.fill();
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
