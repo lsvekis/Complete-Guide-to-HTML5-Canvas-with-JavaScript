@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Circles on Click</title>
+</head>
+<body>
+<canvas id="circleCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('circleCanvas');
+const ctx = canvas.getContext('2d');
+// Keep track of circles in an array
+const circles = [];
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+  // Store a new circle
+  circles.push({ x: mouseX, y: mouseY, r: 10 + Math.random() * 10 });
+  // Re-draw all circles
+  drawAll();
+});
+function drawAll() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let c of circles) {
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+  }
+}
+</script>
+</body>
+</html>
