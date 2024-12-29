@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Cropping Image</title>
+</head>
+<body>
+<canvas id="cropCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('cropCanvas');
+const ctx = canvas.getContext('2d');
+const bigImg = new Image();
+bigImg.src = 'https://via.placeholder.com/400x300';
+bigImg.onload = ()=>{
+  // draw the whole image
+  ctx.drawImage(bigImg, 0, 0);
+  // Now crop (100x100) from top-left (50,50), place at (200,150)
+  ctx.drawImage(bigImg, 50,50, 100,100, 200,150,100,100);
+};
+</script>
+</body>
+</html>
