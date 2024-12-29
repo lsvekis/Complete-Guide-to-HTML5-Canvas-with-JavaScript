@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Gradient Text</title>
+</head>
+<body>
+<canvas id="textCanvas" width="500" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('textCanvas');
+const ctx = canvas.getContext('2d');
+// Create a radial gradient for text fill
+const gradText = ctx.createRadialGradient(250, 100, 20, 250, 100, 140);
+gradText.addColorStop(0, '#ffe259');
+gradText.addColorStop(0.5, '#ffa751');
+gradText.addColorStop(1, '#f83600');
+ctx.font = 'bold 60px Arial';
+ctx.fillStyle = gradText;
+ctx.fillText('Gradient Fun!', 70, 120);
+</script>
+</body>
+</html>
