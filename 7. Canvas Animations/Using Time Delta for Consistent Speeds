@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Delta Time</title>
+</head>
+<body>
+<canvas id="deltaCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('deltaCanvas');
+const ctx = canvas.getContext('2d');
+let xPos = 0;
+const yPos = 100;
+const radius = 15;
+// We'll define speed in pixels per second
+const speedPxPerSec = 100;
+let lastTime = 0;
+function animate(timestamp) {
+  // Calculate delta in seconds
+  if (!lastTime) lastTime = timestamp;
+  const delta = (timestamp - lastTime) / 1000; // convert ms to sec
+  lastTime = timestamp;
+  // Clear canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Move ball by speedPxPerSec * delta
+  xPos += speedPxPerSec * delta;
+  // Wrap around
+  if (xPos - radius > canvas.width) {
+    xPos = -radius;
+  }
+  // Draw
+  ctx.beginPath();
+  ctx.arc(xPos, yPos, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'red';
+  ctx.fill();
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
