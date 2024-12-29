@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: textAlign</title>
+</head>
+<body>
+<canvas id="alignCanvas" width="600" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('alignCanvas');
+const ctx = canvas.getContext('2d');
+const midX = canvas.width / 2;
+const midY = canvas.height / 2;
+// Draw reference line
+ctx.beginPath();
+ctx.moveTo(midX, 0);
+ctx.lineTo(midX, canvas.height);
+ctx.strokeStyle = 'gray';
+ctx.stroke();
+// Left-aligned text
+ctx.textAlign = "left";
+ctx.font = "20px Arial";
+ctx.fillStyle = "blue";
+ctx.fillText("Left-aligned", midX, midY - 40);
+// Center-aligned text
+ctx.textAlign = "center";
+ctx.fillStyle = "green";
+ctx.fillText("Center-aligned", midX, midY);
+// Right-aligned text
+ctx.textAlign = "right";
+ctx.fillStyle = "red";
+ctx.fillText("Right-aligned", midX, midY + 40);
+</script>
+</body>
+</html>
