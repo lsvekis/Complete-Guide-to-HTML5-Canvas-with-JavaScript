@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Cropping</title>
+</head>
+<body>
+<canvas id="canvas3" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('canvas3');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+img.src = 'https://via.placeholder.com/400x200?text=Source+Image';
+img.onload = () => {
+  // Draw the source image as reference
+  ctx.drawImage(img, 10, 10);
+  // Crop a 100x100 region from top-left of the image
+  // Place it at (420, 10) and keep it 100x100
+  ctx.drawImage(img, 
+                0, 0, // sx, sy (top-left corner of source)
+                100, 100, // sWidth, sHeight
+                420, 10, // dx, dy
+                100, 100 // dWidth, dHeight
+  );
+  // Crop another region from the center
+  ctx.drawImage(img,
+                150, 50, // cropping from center part 
+                100, 100,
+                420, 120, 
+                100, 100);
+};
+</script>
+</body>
+</html>
