@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Using resetTransform()</title>
+</head>
+<body>
+<canvas id="matrixCanvas4" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('matrixCanvas4');
+const ctx = canvas.getContext('2d');
+// Apply some transformations
+ctx.translate(100, 50);
+ctx.rotate(Math.PI / 4);
+ctx.scale(2, 2);
+// Draw a rectangle under these transformations
+ctx.fillStyle = 'blue';
+ctx.fillRect(0, 0, 40, 40);
+// Now completely reset
+ctx.resetTransform();
+// Draw another rectangle with no transformations
+ctx.fillStyle = 'red';
+ctx.fillRect(0, 0, 40, 40);
+</script>
+</body>
+</html>
