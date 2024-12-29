@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Circular Image Clip</title>
+</head>
+<body>
+<canvas id="clipCanvas1" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('clipCanvas1');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+img.src = 'https://via.placeholder.com/400x300';
+img.onload = () => {
+  // Save context state
+  ctx.save();
+  // Define circle path
+  ctx.beginPath();
+  ctx.arc(200, 150, 100, 0, 2*Math.PI);
+  ctx.clip(); // Now only the circular area is the clipping region
+  // Draw the entire image - only the circle portion is visible
+  ctx.drawImage(img, 0, 0, 400, 300);
+  // Restore context (optional if you want to revert to full canvas clipping)
+  ctx.restore();
+};
+</script>
+</body>
