@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Animated Shadow</title>
+</head>
+<body>
+<canvas id="animShadowCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('animShadowCanvas');
+const ctx = canvas.getContext('2d');
+let angle = 0;
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Calculate offsets from angle (like a circular pattern)
+  let offsetX = 10 * Math.cos(angle);
+  let offsetY = 10 * Math.sin(angle);
+  // Set shadow properties
+  ctx.shadowColor = 'rgba(0,0,0,0.5)';
+  ctx.shadowBlur = 10;
+  ctx.shadowOffsetX = offsetX;
+  ctx.shadowOffsetY = offsetY;
+  // Draw a rectangle
+  ctx.fillStyle = 'orange';
+  ctx.fillRect(200, 120, 60, 40);
+  angle += 0.03;
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
