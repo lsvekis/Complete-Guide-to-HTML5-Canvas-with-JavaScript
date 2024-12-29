@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Keyboard Arrow</title>
+</head>
+<body>
+<canvas id="keyCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('keyCanvas');
+const ctx = canvas.getContext('2d');
+let circle = { x: 250, y:150, r:20 };
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
+  ctx.fillStyle = 'blue';
+  ctx.fill();
+}
+document.addEventListener('keydown', (e) => {
+  const step = 10;
+  if (e.key === 'ArrowLeft') {
+    circle.x -= step;
+  } else if (e.key === 'ArrowRight') {
+    circle.x += step;
+  } else if (e.key === 'ArrowUp') {
+    circle.y -= step;
+  } else if (e.key === 'ArrowDown') {
+    circle.y += step;
+  }
+  draw();
+});
+draw();
+</script>
+</body>
+</html>
