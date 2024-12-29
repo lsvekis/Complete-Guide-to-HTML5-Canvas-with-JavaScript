@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Dev Tool Breakpoint</title>
+</head>
+<body>
+<canvas id="breakCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+function draw() {
+  // Place a breakpoint here in dev tools
+  let c = document.getElementById('breakCanvas');
+  let ctx = c.getContext('2d');
+  ctx.fillStyle='yellow';
+  ctx.fillRect(50,50,100,80);
+}
+draw();
+</script>
+</body>
+</html>
