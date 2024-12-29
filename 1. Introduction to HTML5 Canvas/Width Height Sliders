@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Sliders for Width & Height</title>
+  <style>
+    #sliderContainer {
+      display: flex;
+      flex-direction: column;
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+    #dimensions {
+      margin-top: 10px;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<div id="sliderContainer">
+  <label for="widthSlider">Width:</label>
+  <input type="range" id="widthSlider" min="100" max="600" value="400">
+  <label for="heightSlider">Height:</label>
+  <input type="range" id="heightSlider" min="100" max="400" value="200">
+  <div id="dimensions"></div>
+</div>
+<canvas id="customSizeCanvas"></canvas>
+<script>
+  const widthSlider = document.getElementById('widthSlider');
+  const heightSlider = document.getElementById('heightSlider');
+  const dimsOutput = document.getElementById('dimensions');
+  const canvas = document.getElementById('customSizeCanvas');
+  const ctx = canvas.getContext('2d');
+  function updateCanvasSize() {
+    const newWidth = parseInt(widthSlider.value);
+    const newHeight = parseInt(heightSlider.value);
+    // Update canvas internal resolution
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+    // Display current dimensions
+    dimsOutput.textContent = `Current Canvas Size: ${newWidth} × ${newHeight}`;
+    // Re-draw background
+    ctx.fillStyle = 'lightcoral';
+    ctx.fillRect(0, 0, newWidth, newHeight);
+  }
+  // Listen to input events on the sliders
+  widthSlider.addEventListener('input', updateCanvasSize);
+  heightSlider.addEventListener('input', updateCanvasSize);
+  // Set initial size
+  updateCanvasSize();
+</script>
+</body>
+</html>
