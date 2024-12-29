@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Threshold B/W</title>
+</head>
+<body>
+<canvas id="thresholdCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<button id="threshBtn">Threshold</button>
+<script>
+const canvas = document.getElementById('thresholdCanvas');
+const ctx = canvas.getContext('2d');
+// Draw some text or shapes
+ctx.fillStyle = 'blue';
+ctx.fillRect(50,50,100,100);
+ctx.fillStyle = 'yellow';
+ctx.fillRect(150,80,120,80);
+document.getElementById('threshBtn').addEventListener('click', ()=>{
+  let imgData = ctx.getImageData(0,0, 400,300);
+  let d = imgData.data;
+  const threshold = 128;
+  for(let i=0; i<d.length; i+=4){
+    let r = d[i], g = d[i+1], b = d[i+2];
+    let lum = 0.3*r + 0.59*g + 0.11*b;
+    let color = (lum >= threshold) ? 255 : 0;
+    d[i] = d[i+1] = d[i+2] = color; 
+  }
+  ctx.putImageData(imgData,0,0);
+});
+</script>
+</body>
+</html>
