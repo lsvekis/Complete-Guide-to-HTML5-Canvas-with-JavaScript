@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Different Shadows</title>
+</head>
+<body>
+<canvas id="shadowCanvas3" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('shadowCanvas3');
+const ctx = canvas.getContext('2d');
+// Circle with first shadow
+ctx.shadowColor = 'rgba(0,0,0,0.3)';
+ctx.shadowBlur = 5;
+ctx.shadowOffsetX = 5;
+ctx.shadowOffsetY = 5;
+ctx.fillStyle = 'red';
+ctx.beginPath();
+ctx.arc(100, 100, 40, 0, 2*Math.PI);
+ctx.fill();
+// Rectangle with second shadow
+ctx.shadowColor = 'rgba(0,0,255,0.5)';
+ctx.shadowBlur = 12;
+ctx.shadowOffsetX = -5;
+ctx.shadowOffsetY = 8;
+ctx.fillStyle = 'green';
+ctx.fillRect(200, 70, 80, 60);
+</script>
+</body>
+</html>
