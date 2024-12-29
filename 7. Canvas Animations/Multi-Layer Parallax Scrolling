@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Parallax Scrolling</title>
+</head>
+<body>
+<canvas id="parallaxCanvas" width="600" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('parallaxCanvas');
+const ctx = canvas.getContext('2d');
+// We'll define layers as objects with positions and speeds
+const layers = [
+  { color: 'skyblue', offsetX: 0, speed: 0.5 }, // background
+  { color: 'green', offsetX: 0, speed: 1 },    // midground
+  { color: 'brown', offsetX: 0, speed: 2 }     // foreground
+];
+function drawLayer(layer) {
+  // Fill a rectangle across the entire canvas to represent a "strip"
+  ctx.fillStyle = layer.color;
+  // For demonstration, let's just fill horizontally repeated rectangles
+  for (let x = -600; x <= canvas.width + 600; x += 100) {
+    ctx.fillRect(x + layer.offsetX, 0, 100, 200);
+  }
+}
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Update and draw each layer
+  for (let layer of layers) {
+    layer.offsetX -= layer.speed; // move left
+    // Keep offset from growing too large
+    if (layer.offsetX < -600) {
+      layer.offsetX += 600;
+    }
+    drawLayer(layer);
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
