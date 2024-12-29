@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Multiple Objects</title>
+</head>
+<body>
+<canvas id="multiCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('multiCanvas');
+const ctx = canvas.getContext('2d');
+// Let's create an array of balls with different speeds
+const balls = [
+  { x: 50, y: 60, r: 10, speedX: 1, color: 'blue' },
+  { x: 80, y: 120, r: 15, speedX: 2, color: 'green' },
+  { x: 100, y: 200, r: 12, speedX: 1.5, color: 'orange' }
+];
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Update and draw each ball
+  for (let ball of balls) {
+    // Update
+    ball.x += ball.speedX;
+    if (ball.x - ball.r > canvas.width) {
+      ball.x = -ball.r;
+    }
+    // Draw
+    ctx.beginPath();
+    ctx.arc(ball.x, ball.y, ball.r, 0, 2*Math.PI);
+    ctx.fillStyle = ball.color;
+    ctx.fill();
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
