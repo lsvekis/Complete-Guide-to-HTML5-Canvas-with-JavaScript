@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Seek Video Frame</title>
+</head>
+<body>
+<video id="seekVid" width="400" style="display:none" muted>
+  <source src="sample.mp4" type="video/mp4">
+</video>
+<input type="range" id="timeSlider" min="0" max="100" value="0"/>
+<canvas id="seekCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const video = document.getElementById('seekVid');
+const slider = document.getElementById('timeSlider');
+const canvas = document.getElementById('seekCanvas');
+const ctx = canvas.getContext('2d');
+// Wait for metadata to know video duration
+video.addEventListener('loadedmetadata', ()=>{
+  slider.max = Math.floor(video.duration);
+});
+slider.addEventListener('input', ()=>{
+  let newTime = parseFloat(slider.value);
+  video.currentTime = newTime; 
+});
+// Whenever currentTime changes, draw the frame
+video.addEventListener('seeked', ()=>{
+  ctx.drawImage(video,0,0, canvas.width, canvas.height);
+});
+</script>
+</body>
+</html>
