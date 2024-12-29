@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Mouse Over Shape</title>
+</head>
+<body>
+<canvas id="hoverCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('hoverCanvas');
+const ctx = canvas.getContext('2d');
+let rects = [
+  {x:50, y:50, w:60, h:40, color:'green'},
+  {x:150, y:60, w:80, h:50, color:'blue'}
+];
+canvas.addEventListener('mousemove', (e)=>{
+  const rectC = canvas.getBoundingClientRect();
+  let mx = e.clientX - rectC.left;
+  let my = e.clientY - rectC.top;
+  // Check if inside rect
+  for(let r of rects){
+    if(mx >= r.x && mx <= r.x+r.w && my>=r.y && my<=r.y+r.h){
+      r.hover = true;
+    } else {
+      r.hover = false;
+    }
+  }
+  drawAll();
+});
+function drawAll(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let r of rects){
+    ctx.fillStyle = r.hover ? 'red': r.color;
+    ctx.fillRect(r.x, r.y, r.w, r.h);
+  }
+}
+drawAll();
+</script>
+</body>
+</html>
