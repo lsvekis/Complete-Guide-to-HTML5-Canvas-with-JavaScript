@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Overlapping Rectangles</title>
+</head>
+<body>
+<canvas id="layerCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+  const canvas = document.getElementById('layerCanvas');
+  const ctx = canvas.getContext('2d');
+  // First rectangle in the back
+  ctx.fillStyle = 'lightblue';
+  ctx.fillRect(50, 50, 100, 100);
+  // Second rectangle overlapping the first
+  ctx.fillStyle = 'pink';
+  ctx.fillRect(100, 80, 100, 100);
+  // Outline around the top rectangle
+  ctx.strokeStyle = 'blue';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(100, 80, 100, 100);
+</script>
+</body>
+</html>
