@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Setup: Exercise 3</title>
+  <style>
+    /* The canvas will fill the width, but we handle the actual resolution in JS */
+    #responsiveCanvas {
+      display: block;
+      width: 100%;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+<canvas id="responsiveCanvas"></canvas>
+<script>
+  const canvas = document.getElementById('responsiveCanvas');
+  const ctx = canvas.getContext('2d');
+  function resizeCanvas() {
+    // Match canvas size to the window's inner width, for example
+    canvas.width = window.innerWidth - 40;   // some margin
+    canvas.height = window.innerHeight / 2; // half the window's height
+    // Simple fill to confirm the new size
+    ctx.fillStyle = 'lightgreen';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  // Listen to the window's resize event
+  window.addEventListener('resize', resizeCanvas);
+  // Initialize on load
+  resizeCanvas();
+</script>
+</body>
+</html>
