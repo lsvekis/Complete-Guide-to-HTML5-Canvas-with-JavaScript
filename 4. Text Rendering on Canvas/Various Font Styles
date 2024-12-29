@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Font Styles</title>
+</head>
+<body>
+<canvas id="fontCanvas1" width="450" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('fontCanvas1');
+const ctx = canvas.getContext('2d');
+// 1) Basic normal text
+ctx.font = "16px Arial";
+ctx.fillStyle = "black";
+ctx.fillText("Normal 16px Arial", 20, 40);
+// 2) Bold text
+ctx.font = "bold 20px Arial";
+ctx.fillStyle = "blue";
+ctx.fillText("Bold 20px Arial", 20, 80);
+// 3) Italic text
+ctx.font = "italic 24px Georgia";
+ctx.fillStyle = "green";
+ctx.fillText("Italic 24px Georgia", 20, 120);
+// 4) Combine style, weight, and size
+ctx.font = "italic bold 28px Courier New";
+ctx.fillStyle = "red";
+ctx.fillText("Italic Bold 28px Courier New", 20, 160);
+</script>
+</body>
+</html>
