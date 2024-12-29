@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Centered Radial Gradient</title>
+</head>
+<body>
+<canvas id="radialCanvas" width="300" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('radialCanvas');
+const ctx = canvas.getContext('2d');
+const centerX = 150;
+const centerY = 150;
+// Inner circle radius 20, outer circle radius 100
+const radialGrad = ctx.createRadialGradient(centerX, centerY, 20, centerX, centerY, 100);
+radialGrad.addColorStop(0, 'white');
+radialGrad.addColorStop(0.5, 'skyblue');
+radialGrad.addColorStop(1, 'navy');
+// Fill a circle that covers the gradient’s outer radius
+ctx.beginPath();
+ctx.arc(centerX, centerY, 100, 0, 2 * Math.PI);
+ctx.fillStyle = radialGrad;
+ctx.fill();
+</script>
+</body>
+</html>
