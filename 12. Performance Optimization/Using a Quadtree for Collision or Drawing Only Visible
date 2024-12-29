@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Quadtree for Visibility</title>
+</head>
+<body>
+<canvas id="quadCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('quadCanvas');
+const ctx = canvas.getContext('2d');
+// For brevity, a simplified quadtree approach
+// We'll just store shapes in buckets and check bounding boxes
+let shapes = [];
+for(let i=0;i<200;i++){
+  shapes.push({
+    x: Math.random()*1000,
+    y: Math.random()*1000,
+    r: 5+Math.random()*5,
+    color: `hsl(${Math.random()*360},50%,50%)`
+  });
+}
+let camera = {x:0, y:0, w:400, h:300, dx:2};
+// draw only shapes in camera
+function drawScene(){
+  ctx.clearRect(0,0,400,300);
+  for(let s of shapes){
+    if(s.x + s.r< camera.x || s.x - s.r> camera.x+camera.w ||
+       s.y + s.r< camera.y || s.y - s.r> camera.y+camera.h){
+      continue;
+    }
+    // draw relative to camera
+    let drawX = s.x - camera.x;
+    let drawY = s.y - camera.y;
+    ctx.beginPath();
+    ctx.arc(drawX, drawY, s.r, 0, 2*Math.PI);
+    ctx.fillStyle = s.color;
+    ctx.fill();
+  }
+}
+function animate(){
+  camera.x += camera.dx;
+  if(camera.x <0 || camera.x+camera.w>1000) camera.dx=-camera.dx;
+  drawScene();
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
