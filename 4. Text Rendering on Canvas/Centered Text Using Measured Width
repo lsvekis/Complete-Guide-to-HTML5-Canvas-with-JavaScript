@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Centered with measureText</title>
+</head>
+<body>
+<canvas id="measureCanvas2" width="600" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('measureCanvas2');
+const ctx = canvas.getContext('2d');
+const text = "I'm Centered by measureText!";
+ctx.font = "bold 24px Courier New";
+// measure the width
+const width = ctx.measureText(text).width;
+// compute the x position so the text is centered
+const x = (canvas.width - width) / 2;
+// pick a y position for the text
+const y = canvas.height / 2;
+// draw a guide line at center
+ctx.beginPath();
+ctx.moveTo(canvas.width / 2, 0);
+ctx.lineTo(canvas.width / 2, canvas.height);
+ctx.strokeStyle = 'gray';
+ctx.stroke();
+// fill the text
+ctx.fillStyle = 'blue';
+ctx.fillText(text, x, y);
+</script>
+</body>
+</html>
