@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Gradient & Transparency</title>
+</head>
+<body>
+<canvas id="textCanvas4" width="500" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('textCanvas4');
+const ctx = canvas.getContext('2d');
+// Create a linear gradient for text fill
+const gradient = ctx.createLinearGradient(0, 0, 500, 0);
+gradient.addColorStop(0, 'magenta');
+gradient.addColorStop(0.5, 'blue');
+gradient.addColorStop(1, 'cyan');
+ctx.font = '50px Arial';
+ctx.fillStyle = gradient;
+ctx.fillText('Gradient Text', 50, 100);
+// Semi-transparent stroke
+ctx.lineWidth = 2;
+ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+ctx.strokeText('Gradient Text', 50, 100);
+</script>
+</body>
+</html>
