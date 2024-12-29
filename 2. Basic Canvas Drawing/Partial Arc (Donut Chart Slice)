@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Partial Arc Slice</title>
+</head>
+<body>
+<canvas id="arcSliceCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('arcSliceCanvas');
+const ctx = canvas.getContext('2d');
+ctx.beginPath();
+// Start angle = 0.25π (45°), end angle = 0.75π (135°)
+ctx.arc(200, 100, 60, 0.25 * Math.PI, 0.75 * Math.PI);
+// Optionally close the arc to the center, forming a slice
+ctx.lineTo(200, 100);
+ctx.closePath();
+ctx.fillStyle = 'salmon';
+ctx.fill();
+ctx.strokeStyle = 'red';
+ctx.stroke();
+</script>
+</body>
+</html>
