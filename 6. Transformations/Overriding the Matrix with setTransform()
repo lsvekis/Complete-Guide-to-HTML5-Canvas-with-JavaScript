@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: setTransform Example</title>
+</head>
+<body>
+<canvas id="matrixCanvas1" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('matrixCanvas1');
+const ctx = canvas.getContext('2d');
+// Suppose we have some prior transformations
+ctx.translate(100, 50);
+ctx.rotate(Math.PI / 4);
+// Draw a rectangle in that context
+ctx.fillStyle = 'blue';
+ctx.fillRect(0, 0, 50, 50);
+// Now override everything with setTransform
+// We'll do: scale(2,2), then translate(50,50).
+// The matrix for scale(2,2) then translate(50,50) is: [2,0,0,2,50,50]
+ctx.setTransform(2, 0, 0, 2, 50, 50);
+// This rectangle is unaffected by previous transformations
+ctx.fillStyle = 'red';
+ctx.fillRect(0, 0, 50, 50);
+// If you wanted to go back to no transform, you'd call ctx.resetTransform();
+</script>
+</body>
+</html>
