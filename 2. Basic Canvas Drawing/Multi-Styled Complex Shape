@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Multi-Styled Shape</title>
+</head>
+<body>
+<canvas id="multiStyleCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('multiStyleCanvas');
+const ctx = canvas.getContext('2d');
+ctx.beginPath();
+// Main rectangle
+ctx.rect(30, 30, 120, 80);
+ctx.fillStyle = 'orange';
+ctx.fill();
+// A second subpath for a triangle
+ctx.beginPath();
+ctx.moveTo(200, 50);
+ctx.lineTo(300, 50);
+ctx.lineTo(250, 130);
+ctx.closePath();
+// Stroke the triangle
+ctx.strokeStyle = 'green';
+ctx.lineWidth = 4;
+ctx.stroke();
+// Another subpath for a small circle
+ctx.beginPath();
+ctx.arc(400, 80, 40, 0, 2 * Math.PI);
+ctx.fillStyle = 'blue';
+ctx.fill();
+// Outline the circle with a second stroke style
+ctx.strokeStyle = 'black';
+ctx.lineWidth = 2;
+ctx.stroke();
+</script>
+</body>
+</html>
