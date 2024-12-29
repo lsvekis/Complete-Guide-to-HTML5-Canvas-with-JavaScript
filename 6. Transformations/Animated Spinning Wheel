@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Spinning Wheel</title>
+</head>
+<body>
+<canvas id="rotateCanvas4" width="400" height="400" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('rotateCanvas4');
+const ctx = canvas.getContext('2d');
+let angle = 0;
+function drawWheel() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Center the wheel at canvas center
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  // Rotate by 'angle'
+  ctx.rotate(angle);
+  // Draw a circular wheel with spokes
+  ctx.beginPath();
+  ctx.arc(0, 0, 80, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'black';
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  // Draw spokes
+  for (let i = 0; i < 4; i++) {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(80, 0); // end of the spoke
+    ctx.stroke();
+    ctx.rotate(Math.PI / 2); // 90 degrees
+  }
+  ctx.restore();
+  // Increase angle slightly for next frame
+  angle += 0.02;
+  requestAnimationFrame(drawWheel);
+}
+drawWheel();
+</script>
+</body>
+</html>
