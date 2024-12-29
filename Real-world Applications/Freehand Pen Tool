@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>Exercise: Freehand Pen</title></head>
+<body>
+<canvas id="drawCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const c = document.getElementById('drawCanvas');
+const ctx = c.getContext('2d');
+let isDrawing=false;
+c.addEventListener('mousedown',(e)=>{
+  isDrawing=true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+});
+c.addEventListener('mousemove',(e)=>{
+  if(!isDrawing) return;
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+});
+c.addEventListener('mouseup',()=> isDrawing=false);
+</script>
+</body>
+</html>
