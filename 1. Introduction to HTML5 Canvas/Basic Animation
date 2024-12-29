@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Exercise 5</title>
+</head>
+<body>
+  <canvas id="animationCanvas" width="400" height="200"></canvas>
+  <script>
+    const canvas = document.getElementById('animationCanvas');
+    const ctx = canvas.getContext('2d');
+    let xPos = 0; // Starting position of the circle
+    const yPos = 100;
+    const radius = 20;
+    const speed = 2; // Movement speed
+    function draw() {
+      // Clear the canvas before drawing the next frame
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Draw a circle
+      ctx.beginPath();
+      ctx.arc(xPos, yPos, radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'red';
+      ctx.fill();
+      // Update the x-position
+      xPos += speed;
+      // If the circle goes off-screen, reset it
+      if (xPos - radius > canvas.width) {
+        xPos = -radius; 
+      }
+      // Request the next animation frame
+      requestAnimationFrame(draw);
+    }
+    // Start the animation
+    draw();
+  </script>
+</body>
+</html>
