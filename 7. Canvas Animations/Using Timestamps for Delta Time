@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Delta Time</title>
+</head>
+<body>
+<canvas id="circleCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('circleCanvas');
+const ctx = canvas.getContext('2d');
+let lastTime = 0;
+let xPos = 0;
+let yPos = 150;
+const pxPerSecond = 50;
+const radius = 15;
+function animate(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const deltaMs = timestamp - lastTime;
+  lastTime = timestamp;
+  const deltaSec = deltaMs / 1000;
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Update position
+  xPos += pxPerSecond * deltaSec;
+  if (xPos - radius > canvas.width) {
+    xPos = -radius;
+  }
+  // Draw circle
+  ctx.beginPath();
+  ctx.arc(xPos, yPos, radius, 0, 2 * Math.PI);
+  ctx.fillStyle = 'red';
+  ctx.fill();
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
