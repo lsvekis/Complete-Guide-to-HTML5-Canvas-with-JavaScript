@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Shapes</title>
+  <style>
+    /* Optional: some basic styling */
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- SVG Section -->
+    <svg width="200" height="100" style="border:1px solid #ccc">
+      <rect x="20" y="20" width="60" height="40" fill="blue" />
+    </svg>
+    <!-- Canvas Section -->
+    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #ccc"></canvas>
+  </div>
+  <script>
+    // Draw a rectangle on Canvas
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(20, 20, 60, 40);
+  </script>
+</body>
+</html>
