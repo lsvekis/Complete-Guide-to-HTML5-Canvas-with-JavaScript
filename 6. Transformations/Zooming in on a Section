@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Zooming Section</title>
+</head>
+<body>
+<canvas id="scaleCanvas3" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('scaleCanvas3');
+const ctx = canvas.getContext('2d');
+function drawScene() {
+  // Draw multiple circles in a grid
+  ctx.fillStyle = 'purple';
+  for (let x = 20; x <= 300; x += 60) {
+    for (let y = 20; y <= 200; y += 60) {
+      ctx.beginPath();
+      ctx.arc(x, y, 10, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }
+}
+// Draw the normal scene
+drawScene();
+// Now zoom in on area near (150, 100)
+ctx.save();
+ctx.translate(150, 100); // Move origin to the zoom center
+ctx.scale(2, 2);         // Zoom in by factor of 2
+ctx.translate(-150, -100); // Move back so that point (150,100) remains in place
+drawScene();
+ctx.restore();
+</script>
+</body>
+</html>
