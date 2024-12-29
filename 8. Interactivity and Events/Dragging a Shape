@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Drag a Rectangle</title>
+</head>
+<body>
+<canvas id="dragCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('dragCanvas');
+const ctx = canvas.getContext('2d');
+// Rectangle info
+let rect = {x: 100, y: 100, w: 80, h: 50, color:'orange'};
+let isDragging = false;
+let offsetX, offsetY;
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = rect.color;
+  ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+}
+canvas.addEventListener('mousedown', (e) => {
+  const mousePos = getMousePos(e);
+  // Check if within rect
+  if (mousePos.x >= rect.x && mousePos.x <= rect.x+rect.w &&
+      mousePos.y >= rect.y && mousePos.y <= rect.y+rect.h) {
+    isDragging = true;
+    offsetX = mousePos.x - rect.x;
+    offsetY = mousePos.y - rect.y;
+  }
+});
+canvas.addEventListener('mousemove', (e) => {
+  if (isDragging) {
+    const mousePos = getMousePos(e);
+    // Move rect so that same relative position is maintained
+    rect.x = mousePos.x - offsetX;
+    rect.y = mousePos.y - offsetY;
+    draw();
+  }
+});
+canvas.addEventListener('mouseup', () => {
+  isDragging = false;
+});
+function getMousePos(evt) {
+  const rectCanvas = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rectCanvas.left,
+    y: evt.clientY - rectCanvas.top
+  };
+}
+draw();
+</script>
+</body>
+</html>
