@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Rounded Corner with arcTo</title>
+</head>
+<body>
+<canvas id="arcToCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('arcToCanvas');
+const ctx = canvas.getContext('2d');
+// Begin the path
+ctx.beginPath();
+// Move to corner
+ctx.moveTo(50, 50);
+// Straight line to a second point
+ctx.lineTo(150, 50);
+// Use arcTo to round the corner to the next line
+ctx.arcTo(200, 50, 200, 100, 50); 
+// Then continue to a final point
+ctx.lineTo(200, 150);
+// Draw path
+ctx.strokeStyle = 'black';
+ctx.lineWidth = 3;
+ctx.stroke();
+</script>
+</body>
+</html>
