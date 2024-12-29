@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Canvas Pattern</title>
+</head>
+<body>
+<canvas id="mainCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+// Create an offscreen canvas
+const offCanvas = document.createElement('canvas');
+offCanvas.width = 50;
+offCanvas.height = 50;
+const offCtx = offCanvas.getContext('2d');
+// Draw something dynamic (like a checkerboard pattern) on offCanvas
+for (let y = 0; y < 50; y += 10) {
+  for (let x = 0; x < 50; x += 10) {
+    if ((x + y) % 20 === 0) {
+      offCtx.fillStyle = 'black';
+    } else {
+      offCtx.fillStyle = 'white';
+    }
+    offCtx.fillRect(x, y, 10, 10);
+  }
+}
+// Now use offCanvas as the pattern source
+const mainCanvas = document.getElementById('mainCanvas');
+const ctx = mainCanvas.getContext('2d');
+const pattern = ctx.createPattern(offCanvas, 'repeat');
+ctx.fillStyle = pattern;
+ctx.fillRect(0, 0, mainCanvas.width, mainCanvas.height);
+</script>
+</body>
+</html>
