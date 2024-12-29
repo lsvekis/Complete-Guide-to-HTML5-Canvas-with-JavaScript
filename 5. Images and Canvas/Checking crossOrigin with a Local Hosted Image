@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Same-Origin Image</title>
+</head>
+<body>
+<canvas id="sameOriginCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<button id="checkBtn">Check Canvas Pixel</button>
+<script>
+const canvas = document.getElementById('sameOriginCanvas');
+const ctx = canvas.getContext('2d');
+const checkBtn = document.getElementById('checkBtn');
+// Image is served from the same domain, e.g. /images/sample.jpg
+const localImg = new Image();
+// crossOrigin not required for same-domain
+localImg.src = '/images/sample.jpg';
+localImg.onload = () => {
+  ctx.drawImage(localImg, 50, 50);
+};
+checkBtn.addEventListener('click', () => {
+  try {
+    // Try reading a pixel
+    const pixelData = ctx.getImageData(55, 55, 1, 1).data;
+    console.log('Pixel RGBA:', pixelData);
+  } catch (err) {
+    console.error('Canvas might be tainted or other error:', err);
+  }
+});
+</script>
+</body>
+</html>
