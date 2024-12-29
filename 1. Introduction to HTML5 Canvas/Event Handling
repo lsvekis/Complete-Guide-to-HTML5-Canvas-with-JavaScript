@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Event Handling</title>
+  <style>
+    .container {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- SVG Circle with direct event handler -->
+  <svg width="150" height="150" style="border:1px solid #ccc">
+    <circle id="svgCircle" cx="75" cy="75" r="50" fill="orange" />
+  </svg>
+  <!-- Canvas for circle -->
+  <canvas id="canvasCircle" width="150" height="150" style="border:1px solid #ccc"></canvas>
+</div>
+<script>
+  // --- SVG Event Handling ---
+  const svgCircle = document.getElementById('svgCircle');
+  svgCircle.addEventListener('click', function() {
+    // Toggle color
+    const currentColor = svgCircle.getAttribute('fill');
+    svgCircle.setAttribute('fill', currentColor === 'orange' ? 'purple' : 'orange');
+  });
+  // --- Canvas Event Handling ---
+  const canvas = document.getElementById('canvasCircle');
+  const ctx = canvas.getContext('2d');
+  // Draw the circle initially
+  let canvasFill = 'orange';
+  function drawCircle() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(75, 75, 50, 0, Math.PI * 2);
+    ctx.fillStyle = canvasFill;
+    ctx.fill();
+  }
+  drawCircle();
+  // Detect click inside circle
+  canvas.addEventListener('click', function(e) {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    // Calculate distance from center
+    const dx = mouseX - 75;
+    const dy = mouseY - 75;
+    const distance = Math.sqrt(dx*dx + dy*dy);
+    // If inside the circle, toggle color
+    if(distance <= 50) {
+      canvasFill = (canvasFill === 'orange') ? 'purple' : 'orange';
+      drawCircle();
+    }
+  });
+</script>
+</body>
+</html>
