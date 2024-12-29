@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Image + Video Composite</title>
+</head>
+<body>
+<video id="clipVideo" width="320" height="240" muted autoplay loop style="display:none">
+  <source src="sample.mp4" type="video/mp4">
+</video>
+<canvas id="compCanvas" width="600" height="400" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('compCanvas');
+const ctx = canvas.getContext('2d');
+const video = document.getElementById('clipVideo');
+// Load background image
+const bgImg = new Image();
+bgImg.src = 'https://via.placeholder.com/600x400/abcdef'; // placeholder
+bgImg.onload = ()=>{
+  animate();
+};
+function animate(){
+  // Draw background
+  ctx.drawImage(bgImg, 0, 0, 600, 400);
+  // Draw video on top (if playable)
+  if (!video.paused && !video.ended) {
+    ctx.drawImage(video, 100, 80, 200, 150);
+  }
+  requestAnimationFrame(animate);
+}
+</script>
+</body>
+</html>
