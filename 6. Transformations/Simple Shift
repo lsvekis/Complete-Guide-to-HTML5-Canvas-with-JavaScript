@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Simple Translate</title>
+</head>
+<body>
+<canvas id="simpleTranslate" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('simpleTranslate');
+const ctx = canvas.getContext('2d');
+// Draw rectangle using the default origin
+ctx.fillStyle = 'blue';
+ctx.fillRect(20, 20, 50, 50);
+// Translate the coordinate system
+ctx.save();
+ctx.translate(100, 50);
+// Draw the same rectangle at (20, 20) relative to the new origin
+ctx.fillStyle = 'red';
+ctx.fillRect(20, 20, 50, 50);
+ctx.restore();
+</script>
+</body>
+</html>
