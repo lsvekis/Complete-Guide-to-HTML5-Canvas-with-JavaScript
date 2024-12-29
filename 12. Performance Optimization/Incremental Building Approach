@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Incremental Approach</title>
+</head>
+<body>
+<canvas id="incCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const c = document.getElementById('incCanvas');
+const ctx = c.getContext('2d');
+function drawBackground(){
+  ctx.fillStyle='white';
+  ctx.fillRect(0,0,400,300);
+  // debug
+  console.log("Background drawn");
+}
+function drawCircle(){
+  ctx.fillStyle='green';
+  ctx.beginPath();
+  ctx.arc(200,150,50,0,2*Math.PI);
+  ctx.fill();
+  console.log("Green circle drawn");
+}
+function drawRectangle(){
+  ctx.fillStyle='orange';
+  ctx.fillRect(150,60,100,50);
+  console.log("Orange rectangle drawn");
+}
+// step 1: draw background
+drawBackground();
+// step 2 (comment/uncomment):
+drawCircle();
+// step 3:
+drawRectangle();
+</script>
+</body>
+</html>
