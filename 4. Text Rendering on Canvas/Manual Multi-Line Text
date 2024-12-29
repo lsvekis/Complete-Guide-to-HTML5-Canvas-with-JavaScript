@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Manual Multi-Line</title>
+</head>
+<body>
+<canvas id="textCanvas5" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('textCanvas5');
+const ctx = canvas.getContext('2d');
+// Paragraph of lines
+const lines = [
+  'Canvas does not support',
+  'automatic multiline text.',
+  'This means you have to',
+  'manually break text and',
+  'render each line yourself!'
+];
+ctx.font = '24px sans-serif';
+ctx.fillStyle = 'darkblue';
+let x = 50;
+let y = 50;
+let lineHeight = 30;
+lines.forEach((text, index) => {
+  ctx.fillText(text, x, y + index * lineHeight);
+});
+// Draw a bounding box around the text
+ctx.strokeStyle = 'blue';
+ctx.strokeRect(x - 10, y - lineHeight / 2, 400, lineHeight * lines.length);
+</script>
+</body>
+</html>
