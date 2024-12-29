@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Video Frames</title>
+</head>
+<body>
+<video id="myVideo" width="320" height="240" controls>
+  <source src="sample.mp4" type="video/mp4">
+  <!-- Provide your own video or a publicly accessible one -->
+</video>
+<canvas id="videoCanvas" width="320" height="240" style="border:1px solid #ccc;"></canvas>
+<script>
+const video = document.getElementById('myVideo');
+const canvas = document.getElementById('videoCanvas');
+const ctx = canvas.getContext('2d');
+// draw frames on 'timeupdate' or 'play' events
+function drawFrame() {
+  if (!video.paused && !video.ended) {
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    requestAnimationFrame(drawFrame);
+  }
+}
+video.addEventListener('play', () => {
+  requestAnimationFrame(drawFrame);
+});
+</script>
+</body>
+</html>
