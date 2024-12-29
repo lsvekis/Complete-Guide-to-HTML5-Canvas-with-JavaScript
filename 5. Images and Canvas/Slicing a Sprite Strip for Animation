@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Sprite Strip</title>
+</head>
+<body>
+<canvas id="spriteCanvas" width="400" height="100" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('spriteCanvas');
+const ctx = canvas.getContext('2d');
+// A sprite strip with 4 frames, each 64x64 => total 256x64
+const sprite = new Image();
+sprite.src = 'https://via.placeholder.com/256x64?text=4+Frames';
+sprite.onload = () => {
+  // Each frame is 64 wide, 64 tall
+  const frameWidth = 64;
+  const frameHeight = 64;
+  // Draw each frame spaced out on the canvas
+  for (let i = 0; i < 4; i++) {
+    let sx = i * frameWidth; // slice position in the source image
+    // Destination x position to place frames
+    let dx = 10 + i * (frameWidth + 10);
+    // Crop each frame and draw
+    ctx.drawImage(sprite,
+      sx, 0, frameWidth, frameHeight,
+      dx, 10, frameWidth, frameHeight
+    );
+  }
+};
+</script>
+</body>
+</html>
