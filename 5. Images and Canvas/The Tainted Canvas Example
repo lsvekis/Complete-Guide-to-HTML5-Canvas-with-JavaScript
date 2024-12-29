@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Tainted Canvas Demo</title>
+</head>
+<body>
+<canvas id="taintedCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<button id="exportBtn">Export Canvas</button>
+<script>
+const canvas = document.getElementById('taintedCanvas');
+const ctx = canvas.getContext('2d');
+const exportBtn = document.getElementById('exportBtn');
+// An external image that does NOT have CORS headers
+const img = new Image();
+// Not setting crossOrigin, or it wouldn't matter since the server might not allow it
+img.src = 'https://example.com/no-cors-image.jpg';
+img.onload = () => {
+  ctx.drawImage(img, 0, 0);
+};
+exportBtn.addEventListener('click', () => {
+  try {
+    const dataURL = canvas.toDataURL();
+    console.log('Canvas exported:', dataURL);
+  } catch (err) {
+    console.error('Canvas is tainted! Error:', err);
+  }
+});
+</script>
+</body>
+</html>
