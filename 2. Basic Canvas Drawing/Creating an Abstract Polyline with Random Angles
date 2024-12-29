@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Random Polyline</title>
+</head>
+<body>
+<canvas id="randomCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('randomCanvas');
+const ctx = canvas.getContext('2d');
+ctx.beginPath();
+let startX = 200;
+let startY = 150;
+ctx.moveTo(startX, startY);
+// Generate 10 random segments
+for(let i = 0; i < 10; i++){
+  const angle = Math.random() * 2 * Math.PI; // random angle 0-360
+  const length = 30 + Math.random() * 50;    // random length between 30-80
+  startX += Math.cos(angle) * length;
+  startY += Math.sin(angle) * length;
+  ctx.lineTo(startX, startY);
+}
+// Set stroke style
+ctx.strokeStyle = 'darkorange';
+ctx.lineWidth = 3;
+ctx.lineJoin = 'round'; // smoother corners
+ctx.stroke();
+</script>
+</body>
+</html>
