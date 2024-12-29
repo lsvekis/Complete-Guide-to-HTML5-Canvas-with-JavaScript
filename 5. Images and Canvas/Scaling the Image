@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Scaling</title>
+</head>
+<body>
+<canvas id="canvas2" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('canvas2');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+img.src = 'https://via.placeholder.com/200x100?text=Original';
+img.onload = () => {
+  // Draw original at top-left
+  ctx.drawImage(img, 10, 10);
+  // Scaled to half width & height
+  ctx.drawImage(img, 10, 120, img.width / 2, img.height / 2);
+  // Scaled to double width & height
+  ctx.drawImage(img, 220, 10, img.width * 2, img.height * 2);
+};
+</script>
+</body>
+</html>
