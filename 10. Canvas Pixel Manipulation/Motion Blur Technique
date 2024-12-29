@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Motion Blur</title>
+</head>
+<body>
+<canvas id="motionCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('motionCanvas');
+const ctx = canvas.getContext('2d');
+let xPos = 0;
+let lastFrame = null;
+function animate() {
+  // Draw a semi-transparent overlay to gradually clear old trails
+  ctx.fillStyle = 'rgba(255,255,255,0.1)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Draw a moving shape
+  ctx.fillStyle = 'blue';
+  ctx.beginPath();
+  ctx.arc(xPos, 100, 20, 0, 2*Math.PI);
+  ctx.fill();
+  xPos += 3;
+  if (xPos > canvas.width+20) xPos = -20;
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
