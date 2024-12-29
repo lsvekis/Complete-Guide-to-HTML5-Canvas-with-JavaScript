@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Partial Redraw</title>
+</head>
+<body>
+<canvas id="dirtyCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('dirtyCanvas');
+const ctx = canvas.getContext('2d');
+// a shape
+let rect = { x:50, y:100, w:40, h:40, dx:2, dy:0 };
+// draw static background once
+ctx.fillStyle = 'lightblue';
+ctx.fillRect(0,0, canvas.width, canvas.height);
+// draw shape
+function drawShape(r) {
+  ctx.fillStyle = 'red';
+  ctx.fillRect(r.x, r.y, r.w, r.h);
+}
+// initial
+drawShape(rect);
+function animate() {
+  // compute old rect area => clear it
+  let oldX = rect.x, oldY = rect.y;
+  // update rect position
+  rect.x += rect.dx;
+  // bounce
+  if(rect.x<0 || rect.x+rect.w>canvas.width){
+    rect.dx = -rect.dx;
+  }
+  // dirty-rectangle: clear old area
+  ctx.fillStyle = 'lightblue';
+  ctx.fillRect(oldX, oldY, rect.w, rect.h);
+  // draw new position
+  drawShape(rect);
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
