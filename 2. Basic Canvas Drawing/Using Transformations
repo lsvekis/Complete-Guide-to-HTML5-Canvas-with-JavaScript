@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Transformations</title>
+</head>
+<body>
+  <canvas id="transformCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+  <script>
+    const canvas = document.getElementById('transformCanvas');
+    const ctx = canvas.getContext('2d');
+    // Draw a rectangle without transformation
+    ctx.fillStyle = 'orange';
+    ctx.fillRect(20, 20, 60, 40);
+    // Translate and draw another rectangle
+    ctx.save();  // Save current state
+    ctx.translate(150, 70);
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(0, 0, 60, 40);
+    ctx.restore(); // Restore to the original coordinate system
+    // Rotate around the origin and draw a rectangle
+    ctx.save();
+    ctx.rotate((Math.PI / 180) * 45);  // 45 degrees in radians
+    ctx.fillStyle = 'green';
+    ctx.fillRect(200, 20, 60, 40);
+    ctx.restore();
+  </script>
+</body>
+</html>
