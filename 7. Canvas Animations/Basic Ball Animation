@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Animation</title>
+</head>
+<body>
+<canvas id="ballCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('ballCanvas');
+const ctx = canvas.getContext('2d');
+let xPos = 0;
+const yPos = 100;
+const radius = 15;
+const speed = 2;
+function animate() {
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw the ball
+  ctx.beginPath();
+  ctx.arc(xPos, yPos, radius, 0, Math.PI * 2);
+  ctx.fillStyle = 'blue';
+  ctx.fill();
+  // Update position
+  xPos += speed;
+  // If the ball goes off the right edge, reset it
+  if (xPos - radius > canvas.width) {
+    xPos = -radius;
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
