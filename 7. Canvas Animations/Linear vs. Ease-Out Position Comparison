@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Linear vs. Ease-Out</title>
+</head>
+<body>
+<canvas id="compareCanvas" width="500" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('compareCanvas');
+const ctx = canvas.getContext('2d');
+const duration = 2000; // 2 seconds
+let startTime = null;
+// Easing out (quad)
+function easeOutQuad(t) {
+  return 1 - (1 - t)*(1 - t);
+}
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  let elapsed = timestamp - startTime;
+  if (elapsed > duration) elapsed = duration;
+  let progress = elapsed / duration;
+  // Linear square
+  let xLinear = 50 + (350 - 50) * progress;
+  // Ease-out square
+  let eased = easeOutQuad(progress);
+  let xEase = 50 + (350 - 50) * eased;
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw linear square
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(xLinear, 50, 30, 30);
+  // Draw eased square
+  ctx.fillStyle = 'red';
+  ctx.fillRect(xEase, 120, 30, 30);
+  if (elapsed < duration) {
+    requestAnimationFrame(animate);
+  }
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
