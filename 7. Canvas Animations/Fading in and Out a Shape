@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Fade Animation</title>
+</head>
+<body>
+<canvas id="fadeCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('fadeCanvas');
+const ctx = canvas.getContext('2d');
+let alpha = 0;      // initial
+let fadeSpeed = 0.8; // alpha per second
+let isFadingIn = true;
+let lastTime = 0;
+function animate(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const delta = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  // Update alpha
+  if (isFadingIn) {
+    alpha += fadeSpeed * delta;
+    if (alpha >= 1) {
+      alpha = 1;
+      isFadingIn = false; // switch to fading out
+    }
+  } else {
+    alpha -= fadeSpeed * delta;
+    if (alpha <= 0) {
+      alpha = 0;
+      isFadingIn = true; // switch to fading in
+    }
+  }
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw rectangle with current alpha
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = 'red';
+  ctx.fillRect(100, 50, 200, 100);
+  ctx.restore();
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
