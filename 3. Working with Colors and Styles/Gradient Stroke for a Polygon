@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Gradient Stroke</title>
+</head>
+<body>
+<canvas id="strokeCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('strokeCanvas');
+const ctx = canvas.getContext('2d');
+// Create a diagonal gradient for the stroke
+const strokeGrad = ctx.createLinearGradient(0, 0, 400, 300);
+strokeGrad.addColorStop(0, 'lime');
+strokeGrad.addColorStop(1, 'magenta');
+ctx.strokeStyle = strokeGrad;
+ctx.lineWidth = 5;
+// Draw a polygon (star-like shape)
+ctx.beginPath();
+ctx.moveTo(50, 50);
+ctx.lineTo(350, 60);
+ctx.lineTo(200, 140);
+ctx.lineTo(300, 250);
+ctx.lineTo(100, 250);
+ctx.closePath();
+ctx.stroke();
+</script>
+</body>
+</html>
