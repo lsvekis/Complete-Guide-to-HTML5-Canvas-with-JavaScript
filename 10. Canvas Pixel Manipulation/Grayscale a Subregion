@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Grayscale Region</title>
+</head>
+<body>
+<canvas id="grayCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('grayCanvas');
+const ctx = canvas.getContext('2d');
+// Draw a gradient or image
+let grad = ctx.createRadialGradient(200,150,10, 200,150,200);
+grad.addColorStop(0, 'yellow');
+grad.addColorStop(1, 'purple');
+ctx.fillStyle = grad;
+ctx.fillRect(0,0,400,300);
+// Grayscale only right half
+let regionWidth = 200;
+const imgData = ctx.getImageData(200,0, regionWidth, 300);
+const data = imgData.data;
+for (let i=0; i<data.length; i+=4){
+  let r = data[i], g = data[i+1], b = data[i+2];
+  // simple luminance
+  let gray = 0.3*r + 0.59*g + 0.11*b;
+  data[i] = data[i+1] = data[i+2] = gray;
+}
+// put it back
+ctx.putImageData(imgData, 200, 0);
+</script>
+</body>
+</html>
