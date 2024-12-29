@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Simple Square Motion</title>
+</head>
+<body>
+<canvas id="squareCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('squareCanvas');
+const ctx = canvas.getContext('2d');
+let xPos = 0;
+const yPos = 80;
+const speed = 2;
+const size = 30;
+function animate() {
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw
+  ctx.fillStyle = 'blue';
+  ctx.fillRect(xPos, yPos, size, size);
+  // Update
+  xPos += speed;
+  if (xPos > canvas.width) {
+    xPos = -size;
+  }
+  requestAnimationFrame(animate);
+}
+// Start
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
