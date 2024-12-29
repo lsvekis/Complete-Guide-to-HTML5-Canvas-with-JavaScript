@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Partial Closure</title>
+</head>
+<body>
+<canvas id="partialCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('partialCanvas');
+const ctx = canvas.getContext('2d');
+// Begin path
+ctx.beginPath();
+// Draw a big "base" shape (a skewed rectangle)
+ctx.moveTo(50, 50);
+ctx.lineTo(300, 50);
+ctx.lineTo(280, 200);
+ctx.lineTo(70, 200);
+ctx.closePath();  // closes the base shape
+// Stroke and partially fill the base
+ctx.fillStyle = 'lightcoral';
+ctx.fill();
+ctx.strokeStyle = 'darkred';
+ctx.lineWidth = 3;
+ctx.stroke();
+// Start second portion of the same path (still in the same beginPath)
+ctx.moveTo(90, 120);
+ctx.lineTo(120, 120);
+ctx.lineTo(120, 180); 
+// Not closing this shape, so it's an "open L-shape"
+ctx.strokeStyle = 'black';
+ctx.lineWidth = 2;
+ctx.stroke();
+</script>
+</body>
+</html>
