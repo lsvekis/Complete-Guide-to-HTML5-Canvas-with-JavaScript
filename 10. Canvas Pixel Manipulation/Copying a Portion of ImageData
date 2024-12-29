@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Subregion Copy</title>
+</head>
+<body>
+<canvas id="subCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('subCanvas');
+const ctx = canvas.getContext('2d');
+// Draw an image or gradient
+let grad = ctx.createLinearGradient(0,0,500,0);
+grad.addColorStop(0,'yellow');
+grad.addColorStop(1,'green');
+ctx.fillStyle = grad;
+ctx.fillRect(0,0,500,300);
+// Extract a 100x100 portion from top-left corner
+let region = ctx.getImageData(0,0, 100,100);
+// Put that region at new location (200,100)
+ctx.putImageData(region, 200, 100);
+</script>
+</body>
+</html>
