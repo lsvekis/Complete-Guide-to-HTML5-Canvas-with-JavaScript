@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Setup: Exercise 5</title>
+</head>
+<body>
+  <button id="use2D">Use 2D Context</button>
+  <button id="useWebGL">Use WebGL Context</button>
+  <canvas id="myCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    document.getElementById('use2D').addEventListener('click', () => {
+      const ctx2d = canvas.getContext('2d');
+      if (ctx2d) {
+        console.log('2D context initialized!');
+        ctx2d.fillStyle = 'green';
+        ctx2d.fillRect(0, 0, canvas.width, canvas.height);
+      } else {
+        console.log('2D context not available.');
+      }
+    });
+    document.getElementById('useWebGL').addEventListener('click', () => {
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (gl) {
+        console.log('WebGL context initialized!');
+        // Basic code: Clear the screen to a color
+        gl.clearColor(0.8, 0.2, 0.2, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+      } else {
+        console.log('WebGL not supported on this browser.');
+      }
+    });
+  </script>
+</body>
+</html>
