@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Fill + Stroke Text</title>
+</head>
+<body>
+<canvas id="textCanvas3" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('textCanvas3');
+const ctx = canvas.getContext('2d');
+// Setup font and alignment
+ctx.font = 'bold 40px Georgia';
+ctx.textAlign = 'center';
+ctx.textBaseline = 'middle';
+// Fill the text in gold
+ctx.fillStyle = 'gold';
+ctx.fillText('Gold Text', 200, 100);
+// Stroke the same text in black
+ctx.strokeStyle = 'black';
+ctx.lineWidth = 2;
+ctx.strokeText('Gold Text', 200, 100);
+</script>
+</body>
+</html>
