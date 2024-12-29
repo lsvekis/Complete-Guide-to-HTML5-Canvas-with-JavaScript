@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: DOM vs. Redraw</title>
+</head>
+<body>
+<div style="display:flex; gap:20px;">
+  <svg id="svgCircleGrow" width="200" height="200" style="border:1px solid #ccc">
+    <circle cx="100" cy="100" r="20" fill="blue" />
+  </svg>
+  <canvas id="canvasCircleGrow" width="200" height="200" style="border:1px solid #ccc"></canvas>
+</div>
+<script>
+  // --- SVG DOM-based animation ---
+  const svgEl = document.getElementById('svgCircleGrow');
+  const svgCircle = svgEl.querySelector('circle');
+  let svgRadius = 20;
+  function animateSVG() {
+    svgRadius++;
+    if (svgRadius > 80) svgRadius = 20;
+    svgCircle.setAttribute('r', svgRadius);
+    requestAnimationFrame(animateSVG);
+  }
+  animateSVG();
+  // --- Canvas redraw-based animation ---
+  const canvas = document.getElementById('canvasCircleGrow');
+  const ctx = canvas.getContext('2d');
+  let canvasRadius = 20;
+  function animateCanvas() {
+    canvasRadius++;
+    if (canvasRadius > 80) canvasRadius = 20;
+    // Clear the canvas and redraw
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.arc(100, 100, canvasRadius, 0, Math.PI * 2);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+    requestAnimationFrame(animateCanvas);
+  }
+  animateCanvas();
+</script>
+</body>
+</html>
