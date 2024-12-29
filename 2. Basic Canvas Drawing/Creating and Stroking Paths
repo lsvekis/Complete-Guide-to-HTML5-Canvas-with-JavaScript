@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Paths</title>
+</head>
+<body>
+  <canvas id="pathCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+  <script>
+    const canvas = document.getElementById('pathCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(20, 100);     // Start at x=20, y=100
+    ctx.lineTo(120, 20);     // Line up to x=120, y=20
+    ctx.lineTo(220, 100);    // Diagonal down
+    ctx.lineTo(20, 100);     // Back to start
+    ctx.strokeStyle = 'green';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  </script>
+</body>
+</html>
