@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Save/Restore Alpha</title>
+</head>
+<body>
+<canvas id="alphaCanvas4" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('alphaCanvas4');
+const ctx = canvas.getContext('2d');
+// Draw background
+ctx.fillStyle = 'lightblue';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+// Save the current state, then apply alpha for the circle
+ctx.save();
+ctx.globalAlpha = 0.5;
+ctx.beginPath();
+ctx.arc(100, 100, 60, 0, 2*Math.PI);
+ctx.fillStyle = 'red';
+ctx.fill();
+ctx.restore(); // revert alpha state
+// Draw a fully opaque rectangle
+ctx.fillStyle = 'green';
+ctx.fillRect(200, 50, 150, 100);
+</script>
+</body>
+</html>
