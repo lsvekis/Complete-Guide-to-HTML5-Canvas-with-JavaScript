@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Exercise 1</title>
+</head>
+<body>
+  <canvas id="lineCanvas" width="400" height="200"></canvas>
+  <script>
+    const canvas = document.getElementById('lineCanvas');
+    const ctx = canvas.getContext('2d');
+    // Start a new path
+    ctx.beginPath();
+    // Move the "pen" to an initial position
+    ctx.moveTo(50, 50);
+    // Draw a line from the initial position to a new position
+    ctx.lineTo(350, 150);
+    // Apply a stroke to actually draw the line
+    ctx.strokeStyle = 'blue';
+    ctx.lineWidth = 5;
+    ctx.stroke();
+  </script>
+</body>
+</html>
