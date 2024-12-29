@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Checking Transformations</title>
+</head>
+<body>
+<canvas id="transDebugCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const c = document.getElementById('transDebugCanvas');
+const ctx = c.getContext('2d');
+// We'll apply some translation
+ctx.save();
+console.log("Applying translation (100,50)");
+ctx.translate(100,50);
+// draw shape in this context
+ctx.fillStyle='blue';
+ctx.fillRect(0,0,50,50);
+// We forget to restore => next shape is offset
+console.log("Forgetting to restore => shape #2 offset unexpectedly?");
+ctx.fillStyle='red';
+ctx.fillRect(80,80,50,50);
+// Now let's see how it affects debugging
+</script>
+</body>
+</html>
