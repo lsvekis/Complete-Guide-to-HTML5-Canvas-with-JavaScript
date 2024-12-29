@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Combined transform()</title>
+</head>
+<body>
+<canvas id="matrixCanvas3" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('matrixCanvas3');
+const ctx = canvas.getContext('2d');
+// Start by rotating 30 degrees around the origin
+ctx.rotate(Math.PI / 6);
+// Use transform to multiply further: let's apply scale(1.5, 1) and translate(50, 0)
+// The matrix for scale(1.5,1) then translate(50,0) is:
+// [1.5, 0, 0, 1, 50, 0]
+ctx.transform(1.5, 0, 0, 1, 50, 0);
+// Draw a star or simple shape
+ctx.beginPath();
+ctx.moveTo(0, 0);
+ctx.lineTo(40, 0);
+ctx.lineTo(20, 30);
+ctx.closePath();
+ctx.fillStyle = 'purple';
+ctx.fill();
+// Optionally, draw bounding lines
+ctx.strokeStyle = 'black';
+ctx.stroke();
+</script>
+</body>
+</html>
