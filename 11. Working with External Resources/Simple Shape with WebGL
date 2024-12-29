@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Minimal WebGL Triangle</title>
+</head>
+<body>
+<canvas id="glCanvas" width="400" height="300" style="border:1px solid #ccc; position:relative;"></canvas>
+<script>
+const canvas = document.getElementById('glCanvas');
+const gl = canvas.getContext('webgl');
+// Basic vertex and fragment shader
+const vShaderSrc = `
+attribute vec2 aPosition;
+void main() {
+  gl_Position = vec4(aPosition, 0.0, 1.0);
+}`;
+const fShaderSrc = `
+void main() {
+  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); // red
+}`;
+// compile
+function compileShader(src, type){
+  let shader = gl.createShader(type);
+  gl.shaderSource(shader, src);
+  gl.compileShader(shader);
+  if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
+    console.error('Shader error: ', gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
+  return shader;
+}
+const vShader = compileShader(vShaderSrc, gl.VERTEX_SHADER);
+const fShader = compileShader(fShaderSrc, gl.FRAGMENT_SHADER);
+// link
+let program = gl.createProgram();
+gl.attachShader(program, vShader);
+gl.attachShader(program, fShader);
+gl.linkProgram(program);
+if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
+  console.error('Program link error: ', gl.getProgramInfoLog(program));
+}
+gl.useProgram(program);
+// create buffer for triangle
+let vertices = new Float32Array([
+  0,  0.7,
+ -0.7,-0.7,
+  0.7,-0.7
+]);
+let vbo = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+let aPosLoc = gl.getAttribLocation(program, 'aPosition');
+gl.vertexAttribPointer(aPosLoc, 2, gl.FLOAT, false, 0, 0);
+gl.enableVertexAttribArray(aPosLoc);
+// draw
+gl.clearColor(0,0,0,1);
+gl.clear(gl.COLOR_BUFFER_BIT);
+gl.drawArrays(gl.TRIANGLES, 0, 3);
+</script>
+</body>
+</html>
