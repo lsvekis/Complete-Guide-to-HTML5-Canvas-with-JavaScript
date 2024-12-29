@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Measurement</title>
+</head>
+<body>
+<canvas id="measureCanvas1" width="400" height="150" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('measureCanvas1');
+const ctx = canvas.getContext('2d');
+// Set a specific font
+ctx.font = "20px Arial";
+// Draw the text
+const text = "Measure Me!";
+ctx.fillText(text, 10, 50);
+// Measure the text
+const metrics = ctx.measureText(text);
+console.log("Text Width:", metrics.width);
+// Draw a line at the end of the text for reference
+ctx.beginPath();
+ctx.moveTo(10 + metrics.width, 40);
+ctx.lineTo(10 + metrics.width, 60);
+ctx.strokeStyle = 'red';
+ctx.stroke();
+</script>
+</body>
+</html>
