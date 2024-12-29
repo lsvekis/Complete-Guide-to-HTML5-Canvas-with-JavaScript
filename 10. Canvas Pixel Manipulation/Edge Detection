@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Edge Detection</title>
+</head>
+<body>
+<canvas id="edgeCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('edgeCanvas');
+const ctx = canvas.getContext('2d');
+// Draw gradient or shapes
+let grad = ctx.createLinearGradient(0,0,400,0);
+grad.addColorStop(0,'white');
+grad.addColorStop(1,'black');
+ctx.fillStyle = grad;
+ctx.fillRect(0,0,400,200);
+// function to apply a simple edge kernel
+function edgeDetect() {
+  let src = ctx.getImageData(0,0,400,200);
+  let dst = ctx.createImageData(src.width, src.height);
+  let w = src.width;
+  let h = src.height;
+  let sData = src.data;
+  let dData = dst.data;
+  // Simple kernel: [-1, -1, -1; -1, 8, -1; -1, -1, -1]
+  const kernel = [-1,-1,-1,
+                  -1, 8,-1,
+                  -1,-1,-1];
+  // grayscale first or else we can do color edges. We'll do color edges for demonstration.
+  for(let y=1; y<h-1; y++){
+    for(let x=1; x<w-1; x++){
+      let sumR=0, sumG=0, sumB=0;
+      let i = (y*w + x)*4;
+      // convolve
+      let idx=0; 
+      for(let ky=-1; ky<=1; ky++){
+        for(let kx=-1; kx<=1; kx++){
+          let sx = x + kx;
+          let sy = y + ky;
+          let si = (sy*w + sx)*4;
+          let wt = kernel[idx++];
+          sumR += sData[si]   * wt;
+          sumG += sData[si+1] * wt;
+          sumB += sData[si+2] * wt;
+        }
+      }
+      // place result
+      dData[i]   = Math.min(255, Math.max(0, sumR));
+      dData[i+1] = Math.min(255, Math.max(0, sumG));
+      dData[i+2] = Math.min(255, Math.max(0, sumB));
+      dData[i+3] = 255; // opaque
+    }
+  }
+  ctx.putImageData(dst, 0,0);
+}
+// Wait some seconds, then apply edge detection
+setTimeout(edgeDetect, 2000);
+</script>
+</body>
+</html>
