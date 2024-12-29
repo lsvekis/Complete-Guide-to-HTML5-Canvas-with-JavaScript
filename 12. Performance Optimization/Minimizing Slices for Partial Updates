@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Partial Region Copy</title>
+</head>
+<body>
+<canvas id="partialCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const mainC = document.getElementById('partialCanvas');
+const mainCtx = mainC.getContext('2d');
+const offC = document.createElement('canvas');
+offC.width = 400; offC.height = 300;
+const offCtx = offC.getContext('2d');
+// initial
+offCtx.fillStyle='white';
+offCtx.fillRect(0,0,400,300);
+let shape = {x:30,y:120,w:50,h:50,dx:3};
+function animate(){
+  // erase old area in offscreen
+  offCtx.fillStyle='white';
+  offCtx.fillRect(shape.x, shape.y, shape.w, shape.h);
+  shape.x += shape.dx;
+  if(shape.x<0|| shape.x+shape.w>400){
+    shape.dx = -shape.dx;
+  }
+  // draw new position
+  offCtx.fillStyle='red';
+  offCtx.fillRect(shape.x, shape.y, shape.w, shape.h);
+  // copy only shape’s bounding box to main
+  mainCtx.drawImage(offC, shape.x, shape.y, shape.w, shape.h, shape.x, shape.y, shape.w, shape.h);
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
