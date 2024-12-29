@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Interactive Image/Video Loader</title>
+</head>
+<body>
+<input type="file" id="mediaInput" accept="image/*,video/*" />
+<canvas id="loaderCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('loaderCanvas');
+const ctx = canvas.getContext('2d');
+const mediaInput = document.getElementById('mediaInput');
+mediaInput.addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if (!file) return;
+  if(file.type.startsWith('image/')) {
+    const imgURL = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = ()=>{
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img, 0,0, canvas.width, canvas.height);
+      URL.revokeObjectURL(imgURL);
+    };
+    img.src = imgURL;
+  }
+  else if(file.type.startsWith('video/')) {
+    const vidURL = URL.createObjectURL(file);
+    const videoEl = document.createElement('video');
+    videoEl.src = vidURL;
+    videoEl.autoplay = true;
+    videoEl.muted = true; 
+    videoEl.addEventListener('play', ()=>{
+      // draw frames
+      (function drawFrame(){
+        if(!videoEl.paused && !videoEl.ended) {
+          ctx.drawImage(videoEl, 0,0, canvas.width, canvas.height);
+          requestAnimationFrame(drawFrame);
+        }
+      })();
+    });
+  }
+});
+</script>
+</body>
+</html>
