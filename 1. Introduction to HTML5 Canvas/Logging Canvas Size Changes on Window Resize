@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Logging Resizes</title>
+  <style>
+    /* The canvas will be half the window width, just for demonstration */
+    #resizeCanvas {
+      border: 1px solid #ccc;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="resizeCanvas"></canvas>
+<script>
+  const canvas = document.getElementById('resizeCanvas');
+  const ctx = canvas.getContext('2d');
+  function adjustSize() {
+    // We set the internal resolution to half the window's width
+    canvas.width = Math.floor(window.innerWidth / 2);
+    canvas.height = 200;
+    // Log the new dimensions
+    console.log('New canvas size:', canvas.width, canvas.height);
+    // Simple fill to visualize new dimension
+    ctx.fillStyle = 'lavender';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  // Set up listener
+  window.addEventListener('resize', adjustSize);
+  // Initial call
+  adjustSize();
+</script>
+</body>
+</html>
