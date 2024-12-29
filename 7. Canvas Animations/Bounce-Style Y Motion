@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Bounce Easing</title>
+</head>
+<body>
+<canvas id="bounceEasingCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('bounceEasingCanvas');
+const ctx = canvas.getContext('2d');
+let startTime = null;
+const duration = 2500; // ms
+// A basic bounce easing function
+function easeBounce(t) {
+  // One simple approach
+  if (t < 0.3636) {
+    return 7.5625 * t * t;
+  } else if (t < 0.7272) {
+    t -= 0.5455;
+    return 7.5625 * t * t + 0.75;
+  } else if (t < 0.9091) {
+    t -= 0.81818;
+    return 7.5625 * t * t + 0.9375;
+  } else {
+    t -= 0.9545;
+    return 7.5625 * t * t + 0.984375;
+  }
+}
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  let elapsed = timestamp - startTime;
+  if (elapsed > duration) elapsed = duration;
+  let progress = elapsed / duration;
+  let eased = easeBounce(progress);
+  // Map from y=0 to y=200
+  let yPos = 0 + (200 - 0) * eased;
+  // Clear
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Draw ball
+  ctx.beginPath();
+  ctx.arc(200, yPos, 20, 0, 2 * Math.PI);
+  ctx.fillStyle = 'blue';
+  ctx.fill();
+  if (elapsed < duration) {
+    requestAnimationFrame(animate);
+  }
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
