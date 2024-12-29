@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Simple Bar Chart</title>
+  <style>
+    body { display: flex; gap: 20px; }
+    svg, canvas { border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+<!-- SVG Bar Chart -->
+<svg id="svgChart" width="300" height="200"></svg>
+<!-- Canvas Bar Chart -->
+<canvas id="canvasChart" width="300" height="200"></canvas>
+<script>
+  const data = [50, 80, 120, 70, 90];
+  const barWidth = 30;
+  const barGap = 10;
+  const baseLine = 180; // Y position for the bottom of bars
+  // --- SVG Approach ---
+  const svgChart = document.getElementById('svgChart');
+  data.forEach((value, index) => {
+    const bar = document.createElementNS('http://www.w3.org/2000/svg','rect');
+    bar.setAttribute('x', index * (barWidth + barGap) + 10);
+    bar.setAttribute('y', baseLine - value);
+    bar.setAttribute('width', barWidth);
+    bar.setAttribute('height', value);
+    bar.setAttribute('fill', 'green');
+    svgChart.appendChild(bar);
+  });
+  // --- Canvas Approach ---
+  const canvasChart = document.getElementById('canvasChart');
+  const ctx = canvasChart.getContext('2d');
+  ctx.fillStyle = 'green';
+  data.forEach((value, index) => {
+    const xPos = index * (barWidth + barGap) + 10;
+    const yPos = baseLine - value;
+    ctx.fillRect(xPos, yPos, barWidth, value);
+  });
+</script>
+</body>
+</html>
