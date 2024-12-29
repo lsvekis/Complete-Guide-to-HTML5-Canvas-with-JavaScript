@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Grid with Translations</title>
+</head>
+<body>
+<canvas id="gridTranslate" width="500" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('gridTranslate');
+const ctx = canvas.getContext('2d');
+// We'll draw 5 squares, each 60px to the right of the previous
+ctx.fillStyle = 'green';
+let xOffset = 0;
+for (let i = 0; i < 5; i++) {
+  ctx.save();
+  ctx.translate(xOffset, 50);
+  // Draw square at (0, 0) => effectively (xOffset, 50) in the original system
+  ctx.fillRect(0, 0, 40, 40);
+  ctx.restore();
+  xOffset += 60;
+}
+</script>
+</body>
+</html>
