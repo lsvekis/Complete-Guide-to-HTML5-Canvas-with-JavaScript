@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Setup: Exercise 1</title>
+</head>
+<body>
+  <canvas id="canvasOne" width="400" height="200">
+    Your browser does not support the HTML5 Canvas element.
+  </canvas>
+  <script>
+    // Access the canvas and log a message
+    const canvas = document.getElementById('canvasOne');
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      console.log('Canvas and 2D context are successfully initialized!');
+    } else {
+      console.error('Canvas is not supported in this browser.');
+    }
+  </script>
+</body>
+</html>
