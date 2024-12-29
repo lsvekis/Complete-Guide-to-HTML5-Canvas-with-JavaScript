@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Pausing</title>
+</head>
+<body>
+<canvas id="pauseCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<button id="pauseBtn">Pause/Resume</button>
+<script>
+const canvas = document.getElementById('pauseCanvas');
+const ctx = canvas.getContext('2d');
+const pauseBtn = document.getElementById('pauseBtn');
+let xPos = 0;
+let isPaused = false;
+function animate() {
+  if (!isPaused) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'purple';
+    ctx.fillRect(xPos, 80, 40, 40);
+    xPos += 2;
+    // Wrap around
+    if (xPos > canvas.width) {
+      xPos = -40;
+    }
+  }
+  requestAnimationFrame(animate);
+}
+// Start the loop
+animate();
+pauseBtn.addEventListener('click', () => {
+  isPaused = !isPaused;
+});
+</script>
+</body>
+</html>
