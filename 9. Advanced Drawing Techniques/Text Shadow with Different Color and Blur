@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Text Shadow Glow</title>
+</head>
+<body>
+<canvas id="shadowCanvas2" width="500" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('shadowCanvas2');
+const ctx = canvas.getContext('2d');
+// Set up text
+ctx.font = '40px Arial';
+ctx.fillStyle = 'white';
+// Shadow as a colored glow
+ctx.shadowColor = 'blue';
+ctx.shadowBlur = 15;
+ctx.shadowOffsetX = 0;
+ctx.shadowOffsetY = 0;
+// Draw text with glow
+ctx.fillText('Glowing Text', 50, 100);
+</script>
+</body>
+</html>
