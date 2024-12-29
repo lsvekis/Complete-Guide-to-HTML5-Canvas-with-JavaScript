@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Log Frame Times</title>
+</head>
+<body>
+<canvas id="timeCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const c = document.getElementById('timeCanvas');
+const ctx = c.getContext('2d');
+let lastTime=0;
+let x=0;
+function animate(t){
+  if(!lastTime) lastTime=t;
+  let dt = t - lastTime;
+  lastTime=t;
+  console.log(`Frame dt: ${dt.toFixed(2)} ms`);
+  ctx.clearRect(0,0,400,200);
+  ctx.fillStyle='blue';
+  ctx.fillRect(x,80,40,40);
+  x+=2; 
+  if(x>400) x=-40;
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
