@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head><title>Exercise: Pen & Eraser</title></head>
+<body>
+<button id="penBtn">Pen</button>
+<button id="eraserBtn">Eraser</button>
+<canvas id="toolCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const c = document.getElementById('toolCanvas');
+const ctx = c.getContext('2d');
+let currentTool='pen';
+let isDrawing=false;
+document.getElementById('penBtn').addEventListener('click',()=>currentTool='pen');
+document.getElementById('eraserBtn').addEventListener('click',()=>currentTool='eraser');
+c.addEventListener('mousedown',(e)=>{
+  isDrawing=true;
+  ctx.beginPath();
+  ctx.moveTo(e.offsetX, e.offsetY);
+});
+c.addEventListener('mousemove',(e)=>{
+  if(!isDrawing) return;
+  if(currentTool==='pen'){
+    ctx.strokeStyle='black';
+  } else if(currentTool==='eraser'){
+    ctx.strokeStyle='white'; // erase
+  }
+  ctx.lineWidth=5;
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+});
+c.addEventListener('mouseup',()=> isDrawing=false);
+</script>
+</body>
+</html>
