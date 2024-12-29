@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Color Easing</title>
+</head>
+<body>
+<canvas id="colorCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('colorCanvas');
+const ctx = canvas.getContext('2d');
+const duration = 3000; // 3s
+let startTime = null;
+// Ease in-out (quad)
+function easeInOutQuad(t) {
+  return t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
+}
+// We'll animate from color1 (0, 128, 255) to color2 (255, 0, 128)
+const color1 = {r:0, g:128, b:255};
+const color2 = {r:255, g:0, b:128};
+function interpolateColor(c1, c2, t) {
+  // linear interpolation of each channel
+  return {
+    r: c1.r + (c2.r - c1.r) * t,
+    g: c1.g + (c2.g - c1.g) * t,
+    b: c1.b + (c2.b - c1.b) * t
+  };
+}
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  let elapsed = timestamp - startTime;
+  if (elapsed > duration) elapsed = duration;
+  let progress = elapsed / duration;
+  let eased = easeInOutQuad(progress);
+  // Interpolate color
+  const col = interpolateColor(color1, color2, eased);
+  const fillColor = `rgb(${Math.round(col.r)}, ${Math.round(col.g)}, ${Math.round(col.b)})`;
+  // Clear & draw
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = fillColor;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  if (elapsed < duration) {
+    requestAnimationFrame(animate);
+  }
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
