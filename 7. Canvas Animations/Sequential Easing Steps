@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Chained Easing</title>
+</head>
+<body>
+<canvas id="chainCanvas" width="500" height="250" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('chainCanvas');
+const ctx = canvas.getContext('2d');
+let phase = 0; // 0=move, 1=fade
+let startTime = null;
+// Duration for move = 2s, fade = 1.5s
+const moveDuration = 2000;
+const fadeDuration = 1500;
+const rect = { x: 50, y: 100, w: 40, h:40, alpha:1 };
+// Ease in-out for position
+function easeInOutQuad(t) {
+  return t < 0.5 ? 2*t*t : 1 - (Math.pow(-2*t +2, 2)/2);
+}
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  let elapsed = timestamp - startTime;
+  // Clear
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if (phase === 0) {
+    // Phase 0: move from x=50 to x=300 using easeInOutQuad
+    let t = Math.min(elapsed / moveDuration, 1);
+    let eased = easeInOutQuad(t);
+    rect.x = 50 + (300 - 50)* eased;
+    if (t >= 1) {
+      // completed move
+      phase = 1;
+      startTime = timestamp; // reset for next phase
+    }
+  } else if (phase === 1) {
+    // Phase 1: fade out alpha from 1 to 0 with ease-out
+    let fadeElapsed = elapsed;
+    let t = Math.min(fadeElapsed / fadeDuration, 1);
+    // easeOut
+    let alphaEase = 1 - (1 - t)*(1 - t);
+    rect.alpha = 1 - alphaEase; // goes from 1..0
+    if (t >= 1) {
+      rect.alpha = 0;
+      // done with all animations
+    }
+  }
+  // Draw rect
+  ctx.save();
+  ctx.globalAlpha = rect.alpha;
+  ctx.fillStyle = 'green';
+  ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+  ctx.restore();
+  // keep going if there's more to do
+  if (phase < 2) {
+    requestAnimationFrame(animate);
+  }
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
