@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Dashes and Solids</title>
+</head>
+<body>
+<canvas id="dashCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('dashCanvas');
+const ctx = canvas.getContext('2d');
+// First line (dashed)
+ctx.beginPath();
+ctx.moveTo(20, 50);
+ctx.lineTo(380, 50);
+ctx.setLineDash([10, 5]); // 10px dash, 5px gap
+ctx.strokeStyle = 'red';
+ctx.lineWidth = 3;
+ctx.stroke();
+// Second line (solid)
+ctx.beginPath();
+ctx.moveTo(20, 150);
+ctx.lineTo(380, 150);
+ctx.setLineDash([]); // Empty array removes dashes
+ctx.strokeStyle = 'blue';
+ctx.lineWidth = 3;
+ctx.stroke();
+</script>
+</body>
+</html>
