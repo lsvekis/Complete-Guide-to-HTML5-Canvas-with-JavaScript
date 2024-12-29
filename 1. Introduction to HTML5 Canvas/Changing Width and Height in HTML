@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: HTML vs. CSS Sizing</title>
+  <style>
+    /* CSS attempts to alter the second canvas size, but keeps internal resolution at default. */
+    #cssCanvas {
+      width: 400px;   /* purely visual resizing */
+      height: 200px;
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas with explicit HTML attributes -->
+  <canvas id="attrCanvas" width="400" height="200" style="border:2px solid blue;"></canvas>
+  <!-- Canvas with default resolution, but upscaled in CSS -->
+  <canvas id="cssCanvas"></canvas>
+  <script>
+    const canvasAttr = document.getElementById('attrCanvas');
+    const ctxAttr = canvasAttr.getContext('2d');
+    ctxAttr.fillStyle = 'blue';
+    ctxAttr.fillRect(0, 0, canvasAttr.width, canvasAttr.height);
+    const canvasCSS = document.getElementById('cssCanvas');
+    const ctxCSS = canvasCSS.getContext('2d');
+    // The internal resolution is still 300×150, even though visually it’s bigger.
+    ctxCSS.fillStyle = 'red';
+    ctxCSS.fillRect(0, 0, canvasCSS.width, canvasCSS.height);
+    console.log('attrCanvas dimensions:', canvasAttr.width, '×', canvasAttr.height);
+    console.log('cssCanvas dimensions:', canvasCSS.width, '×', canvasCSS.height);
+  </script>
+</body>
+</html>
