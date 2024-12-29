@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Interactive Resize</title>
+</head>
+<body>
+<button id="resizeBtn">Resize Rectangle</button>
+<canvas id="resizeCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+  const canvas = document.getElementById('resizeCanvas');
+  const ctx = canvas.getContext('2d');
+  const btn = document.getElementById('resizeBtn');
+  let rectWidth = 80;
+  let rectHeight = 50;
+  function drawRectangle() {
+    // Clear entire canvas before redrawing
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Draw rectangle with current width and height
+    ctx.fillStyle = 'limegreen';
+    ctx.fillRect(50, 75, rectWidth, rectHeight);
+  }
+  btn.addEventListener('click', () => {
+    // Increase dimensions by 20 each click
+    rectWidth += 20;
+    rectHeight += 10;
+    drawRectangle();
+  });
+  // Initial draw
+  drawRectangle();
+</script>
+</body>
+</html>
