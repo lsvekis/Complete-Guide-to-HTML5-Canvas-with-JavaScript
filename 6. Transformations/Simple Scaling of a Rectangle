@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Simple Scale</title>
+</head>
+<body>
+<canvas id="scaleCanvas1" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('scaleCanvas1');
+const ctx = canvas.getContext('2d');
+// Original rectangle
+ctx.fillStyle = 'blue';
+ctx.fillRect(20, 50, 50, 30);
+// Scaled rectangle
+ctx.save();
+ctx.scale(2, 1.5);
+ctx.fillStyle = 'red';
+// The same fillRect(20, 50, 50, 30) is now scaled
+ctx.fillRect(20, 50, 50, 30);
+ctx.restore();
+</script>
+</body>
+</html>
