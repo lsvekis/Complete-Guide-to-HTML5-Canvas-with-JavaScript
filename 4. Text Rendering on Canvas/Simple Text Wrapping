@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Basic Wrapping</title>
+</head>
+<body>
+<canvas id="measureCanvas4" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('measureCanvas4');
+const ctx = canvas.getContext('2d');
+ctx.font = "18px Arial";
+const paragraph = "MeasureText lets us check widths. " +
+  "We can wrap text by measuring each word and seeing if it fits on the current line.";
+// desired max line width
+const maxWidth = 400;
+let x = 50;
+let y = 50;
+const lineHeight = 24;
+function wrapText(text, x, y, maxWidth, lineHeight) {
+  const words = text.split(" ");
+  let currentLine = "";
+  for (let i = 0; i < words.length; i++) {
+    const testLine = currentLine + words[i] + " ";
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth) {
+      // Draw the current line and start a new line
+      ctx.fillText(currentLine, x, y);
+      currentLine = words[i] + " ";
+      y += lineHeight;
+    } else {
+      currentLine = testLine;
+    }
+  }
+  ctx.fillText(currentLine, x, y);
+}
+wrapText(paragraph, x, y, maxWidth, lineHeight);
+// Outline a box for reference
+ctx.strokeStyle = 'red';
+ctx.strokeRect(x, y - lineHeight, maxWidth, 200);
+</script>
+</body>
+</html>
