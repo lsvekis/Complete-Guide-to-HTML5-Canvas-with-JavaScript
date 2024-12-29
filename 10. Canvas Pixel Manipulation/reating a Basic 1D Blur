@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: 1D Horizontal Blur</title>
+</head>
+<body>
+<canvas id="hBlurCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<button id="blurBtn">Apply Horizontal Blur</button>
+<script>
+const canvas = document.getElementById('hBlurCanvas');
+const ctx = canvas.getContext('2d');
+// draw shapes
+ctx.fillStyle = 'blue';
+ctx.fillRect(50,70,100,60);
+ctx.fillStyle = 'red';
+ctx.fillRect(170, 50, 100,80);
+function horizontalBlur(srcData, srcW, srcH) {
+  let dst = new Uint8ClampedArray(srcData.length);
+  for(let y=0; y<srcH; y++){
+    for(let x=0; x<srcW; x++){
+      let i = (y*srcW + x)*4;
+      let sumR=0, sumG=0, sumB=0, sumA=0;
+      let count=0;
+      // sample 3 neighbors: x-1, x, x+1 (clamp to range)
+      for(let nx=x-1; nx<=x+1; nx++){
+        if(nx >=0 && nx<srcW){
+          let idx = (y*srcW + nx)*4;
+          sumR+= srcData[idx];
+          sumG+= srcData[idx+1];
+          sumB+= srcData[idx+2];
+          sumA+= srcData[idx+3];
+          count++;
+        }
+      }
+      dst[i]   = sumR/count;
+      dst[i+1] = sumG/count;
+      dst[i+2] = sumB/count;
+      dst[i+3] = sumA/count;
+    }
+  }
+  return dst;
+}
+document.getElementById('blurBtn').addEventListener('click', ()=>{
+  let imgData = ctx.getImageData(0,0,400,200);
+  let w = imgData.width, h = imgData.height;
+  let src = imgData.data;
+  let blurred = horizontalBlur(src, w, h);
+  // put the blurred data
+  let outData = new ImageData(blurred, w, h);
+  ctx.putImageData(outData,0,0);
+});
+</script>
+</body>
+</html>
