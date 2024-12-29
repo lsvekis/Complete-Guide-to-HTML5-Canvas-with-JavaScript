@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Culling Off-Screen</title>
+</head>
+<body>
+<canvas id="cullCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('cullCanvas');
+const ctx = canvas.getContext('2d');
+let shapes = [];
+for(let i=0; i<200; i++){
+  shapes.push({
+    x: Math.random()*500,
+    y: Math.random()*300,
+    r: 10+Math.random()*15,
+    dx: -2+Math.random()*4,
+    dy: -2+Math.random()*4,
+    color: `hsl(${Math.random()*360},50%,50%)`
+  });
+}
+function animate() {
+  ctx.clearRect(0,0,500,300);
+  for(let s of shapes){
+    // update
+    s.x += s.dx;
+    s.y += s.dy;
+    if(s.x< -20 || s.x>520) s.dx=-s.dx; 
+    if(s.y< -20 || s.y>320) s.dy=-s.dy;
+    // cull check
+    if(s.x+s.r<0|| s.x-s.r>500|| s.y+s.r<0|| s.y-s.r>300) {
+      // skip draw
+      continue;
+    }
+    // draw
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, 2*Math.PI);
+    ctx.fillStyle = s.color;
+    ctx.fill();
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
