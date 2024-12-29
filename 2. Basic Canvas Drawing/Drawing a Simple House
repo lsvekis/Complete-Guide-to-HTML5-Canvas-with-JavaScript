@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: House Shape</title>
+</head>
+<body>
+<canvas id="houseCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('houseCanvas');
+const ctx = canvas.getContext('2d');
+// Begin path for house
+ctx.beginPath();
+// Draw the house base
+ctx.rect(50, 150, 200, 100); 
+// Draw the roof as a triangle
+ctx.moveTo(50, 150);
+ctx.lineTo(150, 80);
+ctx.lineTo(250, 150);
+ctx.closePath();
+// Fill and stroke for visibility
+ctx.fillStyle = 'lightblue';
+ctx.fill();
+ctx.lineWidth = 2;
+ctx.strokeStyle = 'blue';
+ctx.stroke();
+</script>
+</body>
+</html>
