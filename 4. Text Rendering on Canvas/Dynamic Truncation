@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Ellipsis</title>
+</head>
+<body>
+<canvas id="measureCanvas3" width="400" height="120" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('measureCanvas3');
+const ctx = canvas.getContext('2d');
+ctx.font = "16px sans-serif";
+function drawEllipsisText(txt, maxWidth, x, y) {
+  // measure the full text
+  let width = ctx.measureText(txt).width;
+  if (width <= maxWidth) {
+    // if it fits, just draw
+    ctx.fillText(txt, x, y);
+    return;
+  }
+  // otherwise, we truncate
+  // start removing characters until it fits + ...
+  let truncated = txt;
+  while (ctx.measureText(truncated + "...").width > maxWidth && truncated.length > 0) {
+    truncated = truncated.slice(0, -1);
+  }
+  truncated += "...";
+  ctx.fillText(truncated, x, y);
+}
+const sampleText = "This is a really, really long piece of text that might not fit.";
+drawEllipsisText(sampleText, 200, 20, 50);
+</script>
+</body>
+</html>
