@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Exercise 3</title>
+</head>
+<body>
+  <canvas id="gradientCanvas" width="400" height="200"></canvas>
+  <script>
+    const canvas = document.getElementById('gradientCanvas');
+    const ctx = canvas.getContext('2d');
+    // Create a linear gradient
+    const gradient = ctx.createLinearGradient(0, 0, 400, 0);
+    gradient.addColorStop(0, 'purple');
+    gradient.addColorStop(1, 'pink');
+    // Use the gradient to fill a rectangle
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 400, 200);
+  </script>
+</body>
+</html>
