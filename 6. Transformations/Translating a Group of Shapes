@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Group Translate</title>
+</head>
+<body>
+<canvas id="houseCanvas" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('houseCanvas');
+const ctx = canvas.getContext('2d');
+function drawHouse(ctx) {
+  // House base
+  ctx.fillStyle = '#ccc';
+  ctx.fillRect(0, 50, 100, 60);
+  // Roof
+  ctx.beginPath();
+  ctx.moveTo(0, 50);
+  ctx.lineTo(50, 10);
+  ctx.lineTo(100, 50);
+  ctx.closePath();
+  ctx.fillStyle = 'red';
+  ctx.fill();
+}
+// Draw first house at default origin
+drawHouse(ctx);
+// Draw second house offset by (150, 40)
+ctx.save();
+ctx.translate(150, 40);
+drawHouse(ctx);
+ctx.restore();
+// Draw a third house offset by (320, 80)
+ctx.save();
+ctx.translate(320, 80);
+drawHouse(ctx);
+ctx.restore();
+</script>
+</body>
+</html>
