@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Rotation</title>
+</head>
+<body>
+<canvas id="rotateCanvas1" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('rotateCanvas1');
+const ctx = canvas.getContext('2d');
+// Draw a rectangle at (50, 50) with no rotation
+ctx.fillStyle = 'blue';
+ctx.fillRect(50, 50, 100, 50);
+// Now rotate 45° around the top-left corner (the current origin at 0,0)
+ctx.save();
+ctx.rotate(Math.PI / 4); // 45 degrees in radians
+ctx.fillStyle = 'red';
+// The same rectangle coordinates (50, 50, 100, 50) are now relative to the rotated system
+ctx.fillRect(50, 50, 100, 50);
+ctx.restore();
+</script>
+</body>
+</html>
