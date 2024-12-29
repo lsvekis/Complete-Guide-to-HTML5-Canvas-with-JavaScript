@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Hybrid Partial + Double-Buffer</title>
+</head>
+<body>
+<canvas id="hybridCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const mainCanvas = document.getElementById('hybridCanvas');
+const mainCtx = mainCanvas.getContext('2d');
+const offC = document.createElement('canvas');
+offC.width=500; offC.height=300;
+const offCtx = offC.getContext('2d');
+// static background drawn once on offscreen
+offCtx.fillStyle='lightblue';
+offCtx.fillRect(0,0,500,300);
+let shapes = [
+  {x:50, y:80, w:50, h:50, dx:2, color:'red'},
+  {x:200, y:150, w:60, h:60, dx:-3, color:'green'},
+];
+function animate(){
+  for(let s of shapes){
+    // erase old region on offscreen
+    offCtx.fillStyle='lightblue';
+    offCtx.fillRect(s.x, s.y, s.w, s.h);
+    // move
+    s.x += s.dx;
+    if(s.x<0|| s.x+s.w>500) s.dx=-s.dx;
+    // draw new
+    offCtx.fillStyle = s.color;
+    offCtx.fillRect(s.x, s.y, s.w, s.h);
+    // copy only bounding box
+    mainCtx.drawImage(offC, s.x, s.y, s.w, s.h, s.x, s.y, s.w, s.h);
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
