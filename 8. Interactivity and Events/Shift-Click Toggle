@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Shift-Click Toggle</title>
+</head>
+<body>
+<canvas id="shiftCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('shiftCanvas');
+const ctx = canvas.getContext('2d');
+let rect = { x: 150, y: 120, w: 50, h: 50, color: 'green' };
+canvas.addEventListener('click', (e) => {
+  const {x, y} = getMousePos(e);
+  if (x >= rect.x && x <= rect.x+rect.w &&
+      y >= rect.y && y <= rect.y+rect.h) {
+    // If shiftKey is pressed, toggle color
+    if (e.shiftKey) {
+      rect.color = (rect.color === 'green') ? 'red' : 'green';
+    } else {
+      // Normal click: move shape
+      rect.x = x - rect.w / 2;
+      rect.y = y - rect.h / 2;
+    }
+    draw();
+  }
+});
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = rect.color;
+  ctx.fillRect(rect.x, rect.y, rect.w, rect.h);
+}
+// Utility
+function getMousePos(evt) {
+  const rectC = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - rectC.left,
+    y: evt.clientY - rectC.top
+  };
+}
+draw();
+</script>
+</body>
+</html>
