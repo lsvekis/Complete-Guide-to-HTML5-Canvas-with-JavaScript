@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Multiple Subpaths</title>
+</head>
+<body>
+<canvas id="multiPathCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('multiPathCanvas');
+const ctx = canvas.getContext('2d');
+// Begin a single path
+ctx.beginPath();
+// Subpath 1: rectangle
+ctx.moveTo(50, 50);
+ctx.lineTo(150, 50);
+ctx.lineTo(150, 150);
+ctx.lineTo(50, 150);
+ctx.closePath();  // closes the rectangle
+// Subpath 2: triangle, starting a new shape in same path
+ctx.moveTo(250, 50);
+ctx.lineTo(350, 50);
+ctx.lineTo(300, 150);
+ctx.closePath();
+// Fill & stroke the entire path (both shapes)
+ctx.fillStyle = 'lightblue';
+ctx.fill();
+ctx.strokeStyle = 'blue';
+ctx.lineWidth = 3;
+ctx.stroke();
+</script>
+</body>
+</html>
