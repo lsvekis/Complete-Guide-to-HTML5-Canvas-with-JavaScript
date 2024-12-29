@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Zoom a Subregion</title>
+</head>
+<body>
+<canvas id="zoomCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('zoomCanvas');
+const ctx = canvas.getContext('2d');
+// Draw something
+ctx.fillStyle = 'blue';
+ctx.fillRect(50,50,100,100);
+ctx.fillStyle = 'red';
+ctx.fillRect(180,100,60,60);
+// Get a small region (e.g., from x=50,y=50, width=100, height=100)
+let region = ctx.getImageData(50,50,100,100);
+// Clear or move the existing content
+ctx.clearRect(0,0,400,300);
+// Put the same image data back, but bigger => we can't directly scale with putImageData, so let's do a manual approach
+// Alternatively, we can create a temporary canvas or do some trick. But let's do a naive approach with a loop.
+function scaleUpImageData(imgData, scaleFactor, destX, destY) {
+  const srcData = imgData.data;
+  const srcW = imgData.width;
+  const srcH = imgData.height;
+  for (let sy=0; sy<srcH; sy++){
+    for (let sx=0; sx<srcW; sx++){
+      let si = (sy * srcW + sx) * 4;
+      let r = srcData[si];
+      let g = srcData[si+1];
+      let b = srcData[si+2];
+      let a = srcData[si+3];
+      // fill scaleFactor x scaleFactor block
+      for (let dy=0; dy<scaleFactor; dy++){
+        for (let dx=0; dx<scaleFactor; dx++){
+          // position in the final canvas
+          let px = destX + sx*scaleFactor + dx;
+          let py = destY + sy*scaleFactor + dy;
+          let pixelData = ctx.createImageData(1,1);
+          pixelData.data[0] = r;
+          pixelData.data[1] = g;
+          pixelData.data[2] = b;
+          pixelData.data[3] = a;
+          ctx.putImageData(pixelData, px, py);
+        }
+      }
+    }
+  }
+}
+// scale the 100x100 region by factor 2 => 200x200
+scaleUpImageData(region, 2, 100, 50);
+</script>
+</body>
+</html>
