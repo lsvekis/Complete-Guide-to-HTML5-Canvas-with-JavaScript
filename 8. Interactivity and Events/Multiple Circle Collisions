@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Multiple Circle Collisions</title>
+</head>
+<body>
+<canvas id="multiCircleCanvas" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('multiCircleCanvas');
+const ctx = canvas.getContext('2d');
+let circles = [];
+for (let i=0; i<5; i++){
+  circles.push({
+    x: Math.random()* 500+50,
+    y: Math.random()* 200+50,
+    r: 20,
+    vx: Math.random()*4 -2,
+    vy: Math.random()*4 -2,
+    color: 'blue'
+  });
+}
+function distance(ax, ay, bx, by){
+  return Math.sqrt((bx-ax)*(bx-ax) + (by-ay)*(by-ay));
+}
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Update positions
+  for (let c of circles) {
+    c.x += c.vx; c.y += c.vy;
+    // bounce off walls
+    if (c.x - c.r<0 || c.x+c.r>canvas.width) c.vx = -c.vx;
+    if (c.y - c.r<0 || c.y+c.r>canvas.height) c.vy = -c.vy;
+  }
+  // Reset color
+  for (let c of circles) {
+    c.color = 'blue';
+  }
+  // Pairwise collision check
+  for(let i=0; i<circles.length; i++){
+    for(let j=i+1; j<circles.length; j++){
+      let dist = distance(circles[i].x, circles[i].y, circles[j].x, circles[j].y);
+      if (dist < circles[i].r + circles[j].r) {
+        // highlight in red
+        circles[i].color = 'red';
+        circles[j].color = 'red';
+      }
+    }
+  }
+  // Draw
+  for (let c of circles) {
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, c.r, 0, 2*Math.PI);
+    ctx.fillStyle = c.color;
+    ctx.fill();
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
