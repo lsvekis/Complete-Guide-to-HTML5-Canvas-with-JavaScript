@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Negative Scale for Flip</title>
+</head>
+<body>
+<canvas id="scaleCanvas2" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('scaleCanvas2');
+const ctx = canvas.getContext('2d');
+// Original rectangle
+ctx.fillStyle = 'green';
+ctx.fillRect(20, 70, 80, 40);
+// Flip horizontally around x=200
+ctx.save();
+// Move the origin to x=200
+ctx.translate(200, 0);
+// Now flip horizontally
+ctx.scale(-1, 1);
+// Draw the same rectangle so that it ends up mirrored
+ctx.fillStyle = 'orange';
+ctx.fillRect(-20 - 80, 70, 80, 40);
+/*
+ Explanation:
+   We shift to x=200, then scale(-1, 1).
+   Drawing at x=-20 - 80 ensures the rectangle’s left edge lines up with where x=20 was in the original space.
+*/
+ctx.restore();
+</script>
+</body>
+</html>
