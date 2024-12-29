@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Video Grayscale</title>
+</head>
+<body>
+<video id="greyVid" width="320" height="180" muted autoplay loop style="display:none">
+  <source src="sample.mp4" type="video/mp4">
+</video>
+<canvas id="greyCanvas" width="320" height="180" style="border:1px solid #ccc;"></canvas>
+<script>
+const video = document.getElementById('greyVid');
+const canvas = document.getElementById('greyCanvas');
+const ctx = canvas.getContext('2d');
+function drawLoop(){
+  if(!video.paused && !video.ended){
+    // draw frame
+    ctx.drawImage(video,0,0,canvas.width, canvas.height);
+    // get pixels
+    let frame = ctx.getImageData(0,0, canvas.width, canvas.height);
+    let d = frame.data;
+    // grayscale
+    for(let i=0; i<d.length; i+=4){
+      let r = d[i], g = d[i+1], b = d[i+2];
+      let lum = 0.3*r+0.59*g+0.11*b;
+      d[i] = d[i+1] = d[i+2] = lum;
+    }
+    // put back
+    ctx.putImageData(frame,0,0);
+    requestAnimationFrame(drawLoop);
+  }
+}
+video.addEventListener('play', ()=>{
+  requestAnimationFrame(drawLoop);
+});
+</script>
+</body>
+</html>
