@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Combined Optimization</title>
+</head>
+<body>
+<canvas id="optCanvas" width="600" height="400" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('optCanvas');
+const ctx = canvas.getContext('2d');
+// Suppose we have static background
+ctx.fillStyle='white';
+ctx.fillRect(0,0,600,400);
+// shapes
+let shapes = [];
+for(let i=0;i<200;i++){
+  shapes.push({
+    x: Math.random()*600,
+    y: Math.random()*400,
+    r: 8,
+    dx: -2+Math.random()*4,
+    dy: -2+Math.random()*4,
+    color: (i<100?'red':'blue')
+  });
+}
+// only re-draw bounding boxes
+function animate(){
+  for(let s of shapes){
+    // erase old region
+    let oldX=s.x, oldY=s.y;
+    s.x+=s.dx; s.y+=s.dy;
+    if(s.x<0|| s.x+ s.r*2>600) s.dx=-s.dx;
+    if(s.y<0|| s.y+ s.r*2>400) s.dy=-s.dy;
+    // fill old region with static background
+    ctx.fillStyle='white';
+    ctx.fillRect(oldX, oldY, s.r*2, s.r*2);
+    // draw new
+    // cull check
+    if(s.x+ s.r<0|| s.x- s.r>600|| s.y+ s.r<0|| s.y- s.r>400) continue;
+    ctx.fillStyle= s.color;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, 2*Math.PI);
+    ctx.fill();
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
