@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Procedural Gradient</title>
+</head>
+<body>
+<canvas id="imageDataCanvas1" width="300" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('imageDataCanvas1');
+const ctx = canvas.getContext('2d');
+const width = canvas.width;
+const height = canvas.height;
+// Create empty ImageData
+let imgData = ctx.createImageData(width, height);
+let d = imgData.data;
+// Fill with a horizontal gradient from red (left) to blue (right)
+for (let y=0; y<height; y++){
+  for (let x=0; x<width; x++){
+    let i = (y*width + x)*4;
+    // ratio from 0..1
+    let ratio = x/width;
+    // simple interpolation from red => [255,0,0] to blue => [0,0,255]
+    d[i]   = 255*(1-ratio);    // R
+    d[i+1] = 0;                // G
+    d[i+2] = 255*(ratio);      // B
+    d[i+3] = 255;              // A
+  }
+}
+// Put the result
+ctx.putImageData(imgData, 0, 0);
+</script>
+</body>
+</html>
