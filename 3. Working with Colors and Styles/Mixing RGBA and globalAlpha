@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: RGBA + globalAlpha</title>
+</head>
+<body>
+<canvas id="alphaCanvas2" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('alphaCanvas2');
+const ctx = canvas.getContext('2d');
+// Base shape with full opacity
+ctx.fillStyle = 'blue';
+ctx.fillRect(20, 50, 100, 100);
+// Now set an RGBA color and a globalAlpha
+ctx.globalAlpha = 0.5;
+ctx.fillStyle = 'rgba(255, 0, 0, 0.6)'; // 0.6 alpha
+// This rectangle's actual opacity is 0.6 * 0.5 = 0.3
+ctx.fillRect(80, 30, 100, 100);
+// Reset alpha for further drawing
+ctx.globalAlpha = 1.0;
+ctx.fillStyle = 'black';
+ctx.fillText('Red is only 30% opaque over the blue area.', 10, 180);
+</script>
+</body>
+</html>
