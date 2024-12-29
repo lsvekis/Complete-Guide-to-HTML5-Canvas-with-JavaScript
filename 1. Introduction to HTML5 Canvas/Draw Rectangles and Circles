@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Exercise 2</title>
+</head>
+<body>
+  <canvas id="shapeCanvas" width="400" height="200"></canvas>
+  <script>
+    const canvas = document.getElementById('shapeCanvas');
+    const ctx = canvas.getContext('2d');
+    // Draw a filled rectangle
+    ctx.fillStyle = 'green';
+    ctx.fillRect(20, 20, 100, 60);
+    // Draw an outlined rectangle
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(150, 20, 100, 60);
+    // Draw a circle (using arc)
+    ctx.beginPath();
+    ctx.arc(300, 50, 40, 0, Math.PI * 2); // Full circle
+    ctx.fillStyle = 'orange';
+    ctx.fill();
+  </script>
+</body>
+</html>
