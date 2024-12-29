@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Event-Driven Canvas</title>
+</head>
+<body>
+<canvas id="eventCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('eventCanvas');
+const ctx = canvas.getContext('2d');
+let circle = {x: 200, y: 150, r: 30, color:'blue'};
+function drawAll() {
+  ctx.clearRect(0,0,400,300);
+  ctx.fillStyle = 'lightgray';
+  ctx.fillRect(0,0,400,300);
+  ctx.fillStyle = circle.color;
+  ctx.beginPath();
+  ctx.arc(circle.x, circle.y, circle.r, 0, 2*Math.PI);
+  ctx.fill();
+}
+// only re-draw on changes
+let isDragging = false;
+canvas.addEventListener('mousedown',(e)=>{
+  let dx = e.offsetX - circle.x;
+  let dy = e.offsetY - circle.y;
+  if(dx*dx+dy*dy <= circle.r*circle.r){
+    isDragging = true;
+  }
+});
+canvas.addEventListener('mousemove',(e)=>{
+  if(isDragging){
+    circle.x = e.offsetX;
+    circle.y = e.offsetY;
+    drawAll();
+  }
+});
+canvas.addEventListener('mouseup',()=>{
+  isDragging=false;
+});
+drawAll();
+</script>
+</body>
+</html>
