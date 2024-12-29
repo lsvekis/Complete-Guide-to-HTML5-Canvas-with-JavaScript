@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Lighter + Alpha</title>
+</head>
+<body>
+<canvas id="lighterCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('lighterCanvas');
+const ctx = canvas.getContext('2d');
+// We'll set partial alpha for shapes
+ctx.globalAlpha = 0.6;
+// Draw first circle in default mode
+ctx.fillStyle = 'red';
+ctx.beginPath();
+ctx.arc(100, 150, 60, 0, 2*Math.PI);
+ctx.fill();
+// Switch to 'lighter' => overlapping areas lighten
+ctx.globalCompositeOperation = 'lighter';
+// Draw second circle
+ctx.fillStyle = 'blue';
+ctx.beginPath();
+ctx.arc(180, 150, 60, 0, 2*Math.PI);
+ctx.fill();
+// Draw third circle
+ctx.fillStyle = 'green';
+ctx.beginPath();
+ctx.arc(140, 100, 60, 0, 2*Math.PI);
+ctx.fill();
+</script>
+</body>
+</html>
