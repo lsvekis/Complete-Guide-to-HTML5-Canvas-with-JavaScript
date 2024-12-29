@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Zigzag Line</title>
+</head>
+<body>
+<canvas id="zigzagCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('zigzagCanvas');
+const ctx = canvas.getContext('2d');
+ctx.beginPath();
+ctx.moveTo(0, 100);
+let x = 0;
+let y = 100;
+let amplitude = 50;  // Zigzag height
+let segments = 6;
+for(let i = 1; i <= segments; i++) {
+  x += 400 / segments;       // even spacing
+  y = (y === 100 ? 100 - amplitude : 100); // toggle up and down
+  ctx.lineTo(x, y);
+}
+ctx.strokeStyle = 'red';
+ctx.lineWidth = 4;
+ctx.stroke();
+</script>
+</body>
+</html>
