@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Linear Gradient</title>
+</head>
+<body>
+<canvas id="linearCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('linearCanvas');
+const ctx = canvas.getContext('2d');
+// Create a linear gradient from x=0 to x=400 (top to bottom edges remain the same)
+const gradient = ctx.createLinearGradient(0, 0, 400, 0);
+// Add color stops
+gradient.addColorStop(0, 'purple');
+gradient.addColorStop(1, 'cyan');
+// Fill a rectangle with the gradient
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, 400, 200);
+</script>
+</body>
+</html>
