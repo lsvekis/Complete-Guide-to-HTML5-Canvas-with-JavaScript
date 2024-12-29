@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Diamond Path</title>
+</head>
+<body>
+<canvas id="diamondCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('diamondCanvas');
+const ctx = canvas.getContext('2d');
+ctx.beginPath();
+// Move to top vertex
+ctx.moveTo(200, 50);
+// Down-right
+ctx.lineTo(300, 150);
+// Down-left
+ctx.lineTo(200, 250);
+// Up-left
+ctx.lineTo(100, 150);
+// Close the shape, connecting last point back to first
+ctx.closePath();
+// Fill with a color
+ctx.fillStyle = 'lightgreen';
+ctx.fill();
+// Optional stroke
+ctx.strokeStyle = 'green';
+ctx.lineWidth = 3;
+ctx.stroke();
+</script>
+</body>
+</html>
