@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: WebGL + 2D Overlay</title>
+  <style>
+    #container {
+      position: relative;
+      width: 400px;
+      height: 300px;
+    }
+    #webglCanvas {
+      position: absolute;
+      top: 0; left: 0;
+      z-index: 1;
+    }
+    #overlayCanvas {
+      position: absolute;
+      top: 0; left: 0;
+      z-index: 2;
+      pointer-events: none; /* so clicks pass through */
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <canvas id="webglCanvas" width="400" height="300"></canvas>
+  <canvas id="overlayCanvas" width="400" height="300"></canvas>
+</div>
+<script>
+// minimal WebGL init
+const glCanvas = document.getElementById('webglCanvas');
+const overlay = document.getElementById('overlayCanvas');
+const gl = glCanvas.getContext('webgl');
+if(!gl) {
+  alert('WebGL not available'); 
+}
+// draw something WebGL
+gl.clearColor(0.2, 0.2, 0.2, 1);
+gl.clear(gl.COLOR_BUFFER_BIT);
+// For brevity, skipping the full pipeline; pretend we drew a shape
+// Now overlay 2D text
+const oCtx = overlay.getContext('2d');
+oCtx.font = '20px Arial';
+oCtx.fillStyle = 'yellow';
+oCtx.fillText('2D Overlay Text', 20, 40);
+</script>
+</body>
+</html>
