@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Simple Diagonal</title>
+</head>
+<body>
+<canvas id="diagonalCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('diagonalCanvas');
+const ctx = canvas.getContext('2d');
+// Start a new path
+ctx.beginPath();
+// Position the pen at (50, 50)
+ctx.moveTo(50, 50);
+// Draw a line to (350, 150)
+ctx.lineTo(350, 150);
+// Set stroke properties
+ctx.strokeStyle = 'blue';
+ctx.lineWidth = 5;
+// Render the outline
+ctx.stroke();
+</script>
+</body>
+</html>
