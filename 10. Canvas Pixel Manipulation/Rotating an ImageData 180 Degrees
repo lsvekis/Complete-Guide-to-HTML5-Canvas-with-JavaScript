@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 3: Rotate 180</title>
+</head>
+<body>
+<canvas id="rotateCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('rotateCanvas');
+const ctx = canvas.getContext('2d');
+// Draw shapes
+ctx.fillStyle = 'blue';
+ctx.fillRect(50,50,100,80);
+ctx.fillStyle = 'red';
+ctx.fillRect(200,100,100,60);
+// Now rotate entire canvas content 180 in a new ImageData
+let src = ctx.getImageData(0,0,400,300);
+let dst = ctx.createImageData(src.width, src.height);
+let sw = src.width;
+let sh = src.height;
+let sData = src.data;
+let dData = dst.data;
+// 180 rotation => the pixel at (x,y) goes to (sw-1-x, sh-1-y)
+for (let y=0; y<sh; y++){
+  for (let x=0; x<sw; x++){
+    let srcI = (y * sw + x)*4;
+    let rx = (sw-1 - x);
+    let ry = (sh-1 - y);
+    let dstI = (ry * sw + rx)*4;
+    dData[dstI]   = sData[srcI];
+    dData[dstI+1] = sData[srcI+1];
+    dData[dstI+2] = sData[srcI+2];
+    dData[dstI+3] = sData[srcI+3];
+  }
+}
+// Clear and put the rotated data
+ctx.clearRect(0,0,400,300);
+ctx.putImageData(dst,0,0);
+</script>
+</body>
+</html>
