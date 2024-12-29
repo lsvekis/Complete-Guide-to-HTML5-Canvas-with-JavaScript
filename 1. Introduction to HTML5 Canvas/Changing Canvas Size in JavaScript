@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Setup: Exercise 2</title>
+</head>
+<body>
+  <button id="resizeButton">Resize Canvas</button>
+  <canvas id="resizableCanvas" width="200" height="150" style="border:1px solid #ccc;"></canvas>
+  <script>
+    const canvas = document.getElementById('resizableCanvas');
+    const ctx = canvas.getContext('2d');
+    const button = document.getElementById('resizeButton');
+    // Draw something initially
+    ctx.fillStyle = 'skyblue';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    button.addEventListener('click', () => {
+      // Increase dimensions
+      canvas.width = 300;
+      canvas.height = 200;
+      // Redraw after resizing
+      ctx.fillStyle = 'skyblue';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    });
+  </script>
+</body>
+</html>
