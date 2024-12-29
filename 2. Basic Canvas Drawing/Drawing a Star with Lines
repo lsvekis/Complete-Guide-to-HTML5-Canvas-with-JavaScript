@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Star Shape</title>
+</head>
+<body>
+<canvas id="starCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('starCanvas');
+const ctx = canvas.getContext('2d');
+// Coordinates for a simple star (five points)
+const starPoints = [
+  { x: 200, y: 50 },
+  { x: 230, y: 150 },
+  { x: 320, y: 150 },
+  { x: 250, y: 190 },
+  { x: 280, y: 280 },
+  { x: 200, y: 220 },
+  { x: 120, y: 280 },
+  { x: 150, y: 190 },
+  { x: 80,  y: 150 },
+  { x: 170, y: 150 }
+];
+// Begin path
+ctx.beginPath();
+ctx.moveTo(starPoints[0].x, starPoints[0].y);
+// Connect lines for each star point
+for (let i = 1; i < starPoints.length; i++) {
+  ctx.lineTo(starPoints[i].x, starPoints[i].y);
+}
+ctx.closePath(); // close the star shape
+// Style and draw
+ctx.fillStyle = 'gold';
+ctx.fill();
+ctx.strokeStyle = 'black';
+ctx.lineWidth = 2;
+ctx.stroke();
+</script>
+</body>
+</html>
