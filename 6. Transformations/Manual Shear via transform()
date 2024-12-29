@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Shear with transform()</title>
+</head>
+<body>
+<canvas id="matrixCanvas2" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('matrixCanvas2');
+const ctx = canvas.getContext('2d');
+// Draw the original grid
+ctx.strokeStyle = 'gray';
+for (let x = 20; x < 200; x += 20) {
+  ctx.beginPath();
+  ctx.moveTo(x, 0);
+  ctx.lineTo(x, 200);
+  ctx.stroke();
+}
+for (let y = 20; y < 200; y += 20) {
+  ctx.beginPath();
+  ctx.moveTo(0, y);
+  ctx.lineTo(200, y);
+  ctx.stroke();
+}
+// Now apply a shear transform => transform(1, shearY, shearX, 1, 0, 0)
+ctx.save();
+const shearX = 0.5; // Shear along x-axis
+const shearY = 0;   // No shear in y
+ctx.transform(1, shearY, shearX, 1, 0, 0);
+// Draw a rectangle to see the shear effect
+ctx.fillStyle = 'red';
+ctx.fillRect(20, 20, 50, 50);
+ctx.restore();
+</script>
+</body>
+</html>
