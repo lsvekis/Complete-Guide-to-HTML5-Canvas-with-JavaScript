@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Animated Translate</title>
+</head>
+<body>
+<canvas id="animCanvas" width="500" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('animCanvas');
+const ctx = canvas.getContext('2d');
+let offsetX = 0;
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Translate by offsetX
+  ctx.save();
+  ctx.translate(offsetX, 0);
+  // Draw a rectangle that will appear to move
+  ctx.fillStyle = 'purple';
+  ctx.fillRect(50, 70, 60, 60);
+  ctx.restore();
+  offsetX += 2; // move right
+  if (offsetX > canvas.width + 100) {
+    offsetX = -100; // wrap around for continuous loop
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
