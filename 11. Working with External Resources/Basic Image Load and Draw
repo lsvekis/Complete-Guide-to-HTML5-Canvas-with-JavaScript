@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Image</title>
+</head>
+<body>
+<canvas id="imgCanvas" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('imgCanvas');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+img.src = 'https://via.placeholder.com/150'; // example placeholder
+img.onload = () => {
+  // draw at (0,0) in natural size
+  ctx.drawImage(img, 0, 0);
+  // draw at (200,50) scaled to 100x100
+  ctx.drawImage(img, 200, 50, 100, 100);
+};
+</script>
+</body>
+</html>
