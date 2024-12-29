@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Mouse Move Color</title>
+</head>
+<body>
+<canvas id="colorCanvas" width="600" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('colorCanvas');
+const ctx = canvas.getContext('2d');
+let mouseX = 0;
+let mouseY = 0;
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mouseX = e.clientX - rect.left;
+  mouseY = e.clientY - rect.top;
+  draw();
+});
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // The x position will map to a color range
+  // For simplicity, let's create a color from x% of canvas width
+  let ratio = mouseX / canvas.width;
+  let red = Math.floor(255 * ratio);
+  let green = 100; 
+  let blue = 200 - Math.floor(200 * ratio);
+  ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+  ctx.fillRect(mouseX - 25, mouseY - 25, 50, 50);
+}
+</script>
+</body>
+</html>
