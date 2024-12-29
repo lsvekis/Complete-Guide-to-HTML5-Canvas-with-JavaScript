@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Nested Clipping</title>
+</head>
+<body>
+<canvas id="clipCanvas4" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('clipCanvas4');
+const ctx = canvas.getContext('2d');
+function main() {
+  ctx.save();
+  // First clip: rectangle
+  ctx.beginPath();
+  ctx.rect(50, 50, 200, 150);
+  ctx.clip();
+  // Second clip: circle (inside that rect)
+  ctx.beginPath();
+  ctx.arc(150, 125, 70, 0, 2*Math.PI);
+  ctx.clip();
+  // Now let's draw a gradient background
+  let grad = ctx.createLinearGradient(0,0,400,300);
+  grad.addColorStop(0, 'purple');
+  grad.addColorStop(1, 'orange');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,400,300);
+  ctx.restore();
+  // Outline the shapes for reference (not clipped since after restore)
+  ctx.strokeStyle = 'black';
+  ctx.strokeRect(50, 50, 200, 150);
+  ctx.beginPath();
+  ctx.arc(150, 125, 70, 0, 2*Math.PI);
+  ctx.stroke();
+}
+main();
+</script>
+</body>
+</html>
