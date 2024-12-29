@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Ease-In-Out Movement</title>
+</head>
+<body>
+<canvas id="easeCanvas" width="500" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('easeCanvas');
+const ctx = canvas.getContext('2d');
+// We want to animate a square from x=50 to x=400 in 2 seconds, using ease-in-out
+const startX = 50;
+const endX = 400;
+const duration = 2000; // ms
+let startTime = null;
+// Easing function (easeInOutQuad)
+function easeInOutQuad(t) {
+  return t < 0.5 
+    ? 2 * t * t 
+    : 1 - Math.pow(-2 * t + 2, 2) / 2;
+}
+function animate(timestamp) {
+  if (!startTime) startTime = timestamp;
+  let elapsed = timestamp - startTime;
+  // clamp
+  if (elapsed > duration) elapsed = duration;
+  // progress [0..1]
+  let progress = elapsed / duration;
+  // eased [0..1]
+  let eased = easeInOutQuad(progress);
+  // current x
+  let xPos = startX + (endX - startX) * eased;
+  // Clear & draw
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'orange';
+  ctx.fillRect(xPos, 80, 40, 40);
+  if (elapsed < duration) {
+    requestAnimationFrame(animate);
+  } else {
+    // done
+    console.log('Animation complete');
+  }
+}
+requestAnimationFrame(animate);
+</script>
+</body>
+</html>
