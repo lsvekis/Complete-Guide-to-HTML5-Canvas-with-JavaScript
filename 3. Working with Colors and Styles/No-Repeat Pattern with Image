@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: No-Repeat Pattern</title>
+</head>
+<body>
+<canvas id="patternCanvas2" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('patternCanvas2');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+img.src = 'https://via.placeholder.com/100x100'; // For a single patch
+img.onload = () => {
+  // Create a pattern with no repeat
+  const pattern = ctx.createPattern(img, 'no-repeat');
+  // Fill style with the single image instance
+  ctx.fillStyle = pattern;
+  // Fill an area bigger than the image
+  ctx.fillRect(50, 50, 300, 200);
+};
+</script>
+</body>
+</html>
