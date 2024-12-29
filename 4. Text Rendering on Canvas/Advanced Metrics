@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Advanced Metrics</title>
+</head>
+<body>
+<canvas id="measureCanvas5" width="600" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('measureCanvas5');
+const ctx = canvas.getContext('2d');
+ctx.font = "30px Georgia";
+ctx.fillStyle = "black";
+const text = "Hello, bounding box!";
+const x = 50;
+const y = 100;
+// Render the text
+ctx.fillText(text, x, y);
+// Attempt advanced metrics
+const m = ctx.measureText(text);
+if (m.actualBoundingBoxAscent !== undefined) {
+  // Calculate bounding box top-left and bottom-right
+  const ascent = m.actualBoundingBoxAscent;
+  const descent = m.actualBoundingBoxDescent;
+  const textWidth = m.width;
+  // Draw bounding box
+  // The box top is y - ascent, left is x
+  ctx.strokeStyle = 'blue';
+  ctx.strokeRect(x, y - ascent, textWidth, ascent + descent);
+  ctx.fillText(
+    `Ascent: ${ascent.toFixed(2)}, Descent: ${descent.toFixed(2)}`,
+    x, y + 40
+  );
+} else {
+  // Fallback if these properties aren't supported
+  ctx.fillStyle = 'red';
+  ctx.fillText("Advanced metrics not supported in this browser.", x, y + 40);
+}
+</script>
+</body>
+</html>
