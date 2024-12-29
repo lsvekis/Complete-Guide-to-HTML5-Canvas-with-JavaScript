@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Shapes</title>
+</head>
+<body>
+  <canvas id="basicCanvas" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+  <script>
+    const canvas = document.getElementById('basicCanvas');
+    const ctx = canvas.getContext('2d');
+    // Filled rectangle
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(20, 20, 100, 50);
+    // Outlined rectangle
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(150, 20, 100, 50);
+  </script>
+</body>
+</html>
