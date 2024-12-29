@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Full Canvas Grayscale</title>
+</head>
+<body>
+<canvas id="grayCanvas" width="400" height="300" style="border:1px solid #ccc;"></canvas>
+<button id="grayBtn">Grayscale</button>
+<script>
+const canvas = document.getElementById('grayCanvas');
+const ctx = canvas.getContext('2d');
+// Draw an initial gradient or shapes
+let grad = ctx.createLinearGradient(0,0,400,0);
+grad.addColorStop(0, 'purple');
+grad.addColorStop(1, 'orange');
+ctx.fillStyle = grad;
+ctx.fillRect(0,0,400,300);
+document.getElementById('grayBtn').addEventListener('click', () => {
+  let imgData = ctx.getImageData(0,0, canvas.width, canvas.height);
+  let d = imgData.data;
+  for(let i=0; i<d.length; i+=4){
+    let r = d[i], g = d[i+1], b = d[i+2];
+    let lum = 0.3*r + 0.59*g + 0.11*b;
+    d[i] = d[i+1] = d[i+2] = lum; // set all to luminance
+  }
+  ctx.putImageData(imgData, 0, 0);
+});
+</script>
+</body>
+</html>
