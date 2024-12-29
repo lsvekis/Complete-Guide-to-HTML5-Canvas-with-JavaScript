@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 4: Clock Face</title>
+</head>
+<body>
+<canvas id="clockCanvas" width="300" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('clockCanvas');
+const ctx = canvas.getContext('2d');
+ctx.beginPath();
+// Outer circle
+ctx.arc(150, 150, 100, 0, 2 * Math.PI);
+ctx.strokeStyle = '#333';
+ctx.lineWidth = 4;
+ctx.stroke();
+// Draw tick marks every 30° (i.e., 6 around the circle)
+for (let i = 0; i < 12; i++) {
+  ctx.save(); // Save state before transformations
+  ctx.translate(150, 150); // Move origin to center
+  const angle = (i * 30) * Math.PI / 180; // convert 30° increments to radians
+  ctx.rotate(angle);
+  // Draw line from the edge inward
+  ctx.beginPath();
+  ctx.moveTo(0, -100);
+  ctx.lineTo(0, -90); // short line (10px)
+  ctx.strokeStyle = 'black';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore(); // revert to original state
+}
+// Center circle
+ctx.beginPath();
+ctx.arc(150, 150, 5, 0, 2 * Math.PI);
+ctx.fillStyle = 'black';
+ctx.fill();
+</script>
+</body>
+</html>
