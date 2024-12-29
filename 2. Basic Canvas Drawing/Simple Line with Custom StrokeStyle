@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Line</title>
+</head>
+<body>
+<canvas id="lineCanvas1" width="400" height="150" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('lineCanvas1');
+const ctx = canvas.getContext('2d');
+// Begin path
+ctx.beginPath();
+ctx.moveTo(30, 75);
+ctx.lineTo(370, 75);
+// Set stroke properties
+ctx.strokeStyle = 'blue';
+ctx.lineWidth = 4;
+// Draw the line
+ctx.stroke();
+</script>
+</body>
+</html>
