@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 5: Animated Custom Matrix</title>
+</head>
+<body>
+<canvas id="matrixCanvas5" width="500" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('matrixCanvas5');
+const ctx = canvas.getContext('2d');
+let angle = 0;    // rotation angle in radians
+let shear = 0;    // shear factor
+let scaleValue = 1;
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Let's build a matrix that includes rotation, shear, and scale
+  // Rotation by 'angle': [cosθ, sinθ, -sinθ, cosθ, 0, 0]
+  // Then shear horizontally by 'shear': [1, 0, shear, 1, 0, 0]
+  // Then scale by 'scaleValue' in x and y: [scaleValue, 0, 0, scaleValue, 0, 0]
+  // We'll approximate a single matrix or multiply them manually.
+  const cosA = Math.cos(angle);
+  const sinA = Math.sin(angle);
+  // We'll do scale -> rotation -> shear in that order for demonstration:
+  // scale: [scaleValue, 0, 0, scaleValue, 0, 0]
+  // rotate: [cosA, sinA, -sinA, cosA, 0, 0]
+  // shear: [1, 0, shear, 1, 0, 0]
+  // multiply them to get final [a, b, c, d, e, f]
+  // For simplicity, let's do them one by one with transform() calls, but we could do the matrix math ourselves.
+  // 1) reset
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  // 2) scale
+  ctx.transform(scaleValue, 0, 0, scaleValue, 0, 0);
+  // 3) rotate
+  ctx.transform(cosA, sinA, -sinA, cosA, 0, 0);
+  // 4) shear
+  ctx.transform(1, 0, shear, 1, 0, 0);
+  // Finally, let's move it to (250,150) so it's centered
+  ctx.transform(1, 0, 0, 1, 250, 150);
+  // Now draw a rectangle at (0,0) => the final transform places it
+  ctx.fillStyle = 'purple';
+  ctx.fillRect(-25, -25, 50, 50);
+  // Update animation parameters
+  angle += 0.02;                 // rotation
+  shear = 0.5 * Math.sin(angle); // shear oscillates
+  scaleValue = 1 + 0.3 * Math.sin(angle * 2); // scale oscillates
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
