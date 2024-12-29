@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise: Single Frame Capture</title>
+</head>
+<body>
+<video id="oneVideo" width="320" height="180" autoplay muted loop>
+  <source src="sample.mp4" type="video/mp4">
+</video>
+<button id="captureBtn">Capture Frame</button>
+<canvas id="singleCanvas" width="320" height="180" style="border:1px solid #ccc;"></canvas>
+<script>
+const video = document.getElementById('oneVideo');
+const canvas = document.getElementById('singleCanvas');
+const ctx = canvas.getContext('2d');
+document.getElementById('captureBtn').addEventListener('click', ()=>{
+  ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+});
+</script>
+</body>
+</html>
