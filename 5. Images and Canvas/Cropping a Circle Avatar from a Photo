@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 2: Circular Crop</title>
+</head>
+<body>
+<canvas id="avatarCanvas" width="300" height="300" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('avatarCanvas');
+const ctx = canvas.getContext('2d');
+// Suppose we have a large photo
+const img = new Image();
+img.src = 'https://via.placeholder.com/300x400?text=Photo'; 
+img.onload = () => {
+  // Crop a 200x200 region from the center of the photo
+  const sx = (img.width - 200) / 2;
+  const sy = (img.height - 200) / 2;
+  const sWidth = 200;
+  const sHeight = 200;
+  // Create a circular clipping path
+  ctx.beginPath();
+  ctx.arc(150, 150, 80, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.clip(); // Now drawing is restricted to this circle
+  // Draw the cropped region into the circle
+  ctx.drawImage(img, sx, sy, sWidth, sHeight, 70, 70, 160, 160);
+};
+</script>
+</body>
+</html>
