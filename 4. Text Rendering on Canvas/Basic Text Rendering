@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exercise 1: Basic Text</title>
+</head>
+<body>
+<canvas id="textCanvas1" width="400" height="200" style="border:1px solid #ccc;"></canvas>
+<script>
+const canvas = document.getElementById('textCanvas1');
+const ctx = canvas.getContext('2d');
+// Filled text
+ctx.font = '20px Arial';
+ctx.fillStyle = 'blue';
+ctx.fillText('Hello Canvas!', 20, 50);
+// Stroked text
+ctx.font = '30px Verdana';
+ctx.strokeStyle = 'red';
+ctx.lineWidth = 2;
+ctx.strokeText('Outline Me', 20, 100);
+</script>
+</body>
+</html>
